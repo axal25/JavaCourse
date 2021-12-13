@@ -1,4 +1,4 @@
-package input.read;
+package input.read.common;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-@DisplayName("other.Test for fibonacci.Fibonacci")
+@DisplayName("Test for fibonacci.Fibonacci")
 public class FibonacciTest {
 
     private static final int[] expFibSeq = new int[]{

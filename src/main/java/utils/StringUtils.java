@@ -1,15 +1,19 @@
 package utils;
 
-import main.Main;
+import screen.constants.ScreenConstants;
 
 public class StringUtils {
     public static String EMPTY = "";
     private static String SPACE = " ";
-    private static String NEW_LINE = "\n\r";
-    private static String TABULATION = "\t";
+    private static String NEW_LINE_FEED = "\n";
+    private static String CARRIAGE_RETURN = "\r";
+    private static String NEW_LINE = String.format("%s%s", NEW_LINE_FEED, CARRIAGE_RETURN);
+    private static String HORIZONTAL_TABULATION = "\t";
 
+    public static String LF = NEW_LINE_FEED;
+    public static String CR = CARRIAGE_RETURN;
     public static String NL = NEW_LINE;
-    public static String TAB = TABULATION;
+    public static String TAB = HORIZONTAL_TABULATION;
 
     static String DEFAULT_WHITE_SPACE = SPACE;
 
@@ -17,7 +21,7 @@ public class StringUtils {
         return input == null || input.isEmpty();
     }
 
-    private static boolean isEmpty(StringBuilder input) {
+    public static boolean isEmpty(StringBuilder input) {
         return input == null || input.toString().isEmpty();
     }
 
@@ -30,7 +34,7 @@ public class StringUtils {
     }
 
     static String getCenteredString(String toPrint) {
-        return getCenteredString(toPrint, EMPTY, DEFAULT_WHITE_SPACE, Main.SCREEN_WIDTH_IN_CHARS);
+        return getCenteredString(toPrint, EMPTY, DEFAULT_WHITE_SPACE, ScreenConstants.SCREEN_WIDTH_IN_CHARS);
     }
 
     static String getCenteredString(String toPrint, String indent, String spacer, int maxLength) {

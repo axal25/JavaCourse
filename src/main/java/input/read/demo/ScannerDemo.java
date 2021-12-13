@@ -1,5 +1,6 @@
-package input.read;
+package input.read.demo;
 
+import input.read.common.DecoratorInputStream;
 import utils.StaticUtils;
 import utils.StringUtils;
 
@@ -22,16 +23,16 @@ class ScannerDemo {
         String inputString = null;
         Scanner scanner = new Scanner(new DecoratorInputStream(System.in));
 
-        InputMessageUtils.promptForInput();
-        InputMessageUtils.promptForValue(InputMessageUtils.getClassNullSafe(StringUtils.EMPTY));
+        InputReadDemoMessageUtils.promptForInput();
+        InputReadDemoMessageUtils.promptForValue(InputReadDemoMessageUtils.getClassNullSafe(StringUtils.EMPTY));
 
         inputString = scanner.next();
-        InputMessageUtils.printInput(inputString, InputMessageUtils.getClassNullSafe(inputString));
+        InputReadDemoMessageUtils.printInput(inputString, InputReadDemoMessageUtils.getClassNullSafe(inputString));
 
         String newLineLeftovers = scanner.nextLine();
-        InputMessageUtils.printChosenOptionNewLineLeftovers(newLineLeftovers);
+        InputReadDemoMessageUtils.printChosenOptionNewLineLeftovers(newLineLeftovers);
 
-        InputMessageUtils.promptToContinue();
+        InputReadDemoMessageUtils.promptToContinue();
         scanner.nextLine();
 
         scanner.close();
@@ -43,20 +44,20 @@ class ScannerDemo {
         Double inputDouble = null;
         Scanner scanner = new Scanner(new DecoratorInputStream(System.in));
 
-        InputMessageUtils.promptForInput();
-        InputMessageUtils.promptForValue(InputMessageUtils.getClassNullSafe(inputDouble));
+        InputReadDemoMessageUtils.promptForInput();
+        InputReadDemoMessageUtils.promptForValue(InputReadDemoMessageUtils.getClassNullSafe(inputDouble));
 
         try {
             inputDouble = scanner.nextDouble();
         } catch (InputMismatchException e) {
-            InputMessageUtils.promptInvalidInput(InputMessageUtils.getClassNullSafe(inputDouble));
+            InputReadDemoMessageUtils.promptInvalidInput(InputReadDemoMessageUtils.getClassNullSafe(inputDouble));
         }
-        InputMessageUtils.printInput(inputDouble, InputMessageUtils.getClassNullSafe(inputDouble));
+        InputReadDemoMessageUtils.printInput(inputDouble, InputReadDemoMessageUtils.getClassNullSafe(inputDouble));
 
         String newLineLeftovers = scanner.nextLine();
-        InputMessageUtils.printChosenOptionNewLineLeftovers(newLineLeftovers);
+        InputReadDemoMessageUtils.printChosenOptionNewLineLeftovers(newLineLeftovers);
 
-        InputMessageUtils.promptToContinue();
+        InputReadDemoMessageUtils.promptToContinue();
         scanner.nextLine();
 
         scanner.close();
@@ -68,30 +69,30 @@ class ScannerDemo {
         Integer inputInteger = null;
         boolean executeLoop = true;
 
-        InputMessageUtils.promptForInput();
+        InputReadDemoMessageUtils.promptForInput();
         Scanner scanner = new Scanner(new DecoratorInputStream(System.in));
         while (executeLoop) {
-            InputMessageUtils.promptForValue(InputMessageUtils.getClassNullSafe(inputInteger));
+            InputReadDemoMessageUtils.promptForValue(InputReadDemoMessageUtils.getClassNullSafe(inputInteger));
             try {
                 inputInteger = scanner.nextInt();
                 executeLoop = false;
 
                 String newLineLeftovers = scanner.nextLine();
-                InputMessageUtils.printChosenOptionNewLineLeftovers(newLineLeftovers);
+                InputReadDemoMessageUtils.printChosenOptionNewLineLeftovers(newLineLeftovers);
             } catch (InputMismatchException e) {
-                InputMessageUtils.promptInvalidInput(InputMessageUtils.getClassNullSafe(inputInteger));
+                InputReadDemoMessageUtils.promptInvalidInput(InputReadDemoMessageUtils.getClassNullSafe(inputInteger));
                 executeLoop = true;
 
                 String newLineLeftovers = scanner.nextLine();
-                InputMessageUtils.printChosenOptionNewLineLeftovers(newLineLeftovers);
+                InputReadDemoMessageUtils.printChosenOptionNewLineLeftovers(newLineLeftovers);
 
                 scanner.close();
                 scanner = new Scanner(new DecoratorInputStream(System.in));
             }
         }
-        InputMessageUtils.printInput(inputInteger, InputMessageUtils.getClassNullSafe(inputInteger));
+        InputReadDemoMessageUtils.printInput(inputInteger, InputReadDemoMessageUtils.getClassNullSafe(inputInteger));
 
-        InputMessageUtils.promptToContinue();
+        InputReadDemoMessageUtils.promptToContinue();
         scanner.nextLine();
 
         scanner.close();

@@ -1,9 +1,9 @@
-package menu;
+package input.read.menu;
 
-import input.read.DecoratorInputStream;
+import input.read.common.DecoratorInputStream;
+import input.read.common.InputCommons;
 import utils.ClassMethodUtils;
 import utils.StaticUtils;
-import utils.StringUtils;
 
 import java.lang.invoke.MethodHandles;
 import java.util.Arrays;
@@ -15,7 +15,6 @@ import java.util.stream.Stream;
 public class Menu {
 
     private static final StaticUtils staticUtils = new StaticUtils(MethodHandles.lookup().lookupClass());
-    private static final String PROMPT_FOR_STRING = "Press [Enter] to continue...";
 
     private Option[] options;
 
@@ -51,18 +50,9 @@ public class Menu {
         }
         scanner.close();
 
-        promptForEnter(String.format("Chosen input: %d. %s.", inputInteger, options[inputInteger].getName()));
+        InputCommons.promptForEnter(String.format("Chosen input: %d. %s.", inputInteger, options[inputInteger].getName()));
 
         return inputInteger;
-    }
-
-    private static void promptForEnter(String message) {
-        Scanner scanner = new Scanner(new DecoratorInputStream(System.in));
-        System.out.print(
-                StringUtils.isBlank(message) ? Menu.PROMPT_FOR_STRING : String.format("%s %s", message, Menu.PROMPT_FOR_STRING)
-        );
-        scanner.nextLine();
-        scanner.close();
     }
 
     private boolean isInputIntegerValid(Integer inputInteger) {

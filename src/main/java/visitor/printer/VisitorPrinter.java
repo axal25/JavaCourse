@@ -1,6 +1,6 @@
 package visitor.printer;
 
-import main.Main;
+import screen.constants.ScreenConstants;
 import utils.StringUtils;
 import visitor.collection.VisitorCollection;
 import visitor.element.A11;
@@ -20,10 +20,10 @@ import java.util.Map;
 import java.util.stream.IntStream;
 
 public class VisitorPrinter {
-    private static final int column1Width = (int) (0.05 * Main.SCREEN_WIDTH_IN_CHARS);
-    private static final int column2Width = (int) (0.1 * Main.SCREEN_WIDTH_IN_CHARS);
-    private static final int column3Width = (int) (0.20 * Main.SCREEN_WIDTH_IN_CHARS);
-    private static final int column4Width = (int) (0.65 * Main.SCREEN_WIDTH_IN_CHARS);
+    private static final int column1Width = (int) (0.05 * ScreenConstants.SCREEN_WIDTH_IN_CHARS);
+    private static final int column2Width = (int) (0.1 * ScreenConstants.SCREEN_WIDTH_IN_CHARS);
+    private static final int column3Width = (int) (0.20 * ScreenConstants.SCREEN_WIDTH_IN_CHARS);
+    private static final int column4Width = (int) (0.65 * ScreenConstants.SCREEN_WIDTH_IN_CHARS);
     private static final String tableIndent = "";
     private static final String tableColumnSeparator = " | ";
     private static final String tableRowSeparator = "-";
@@ -58,10 +58,10 @@ public class VisitorPrinter {
                 new StringBuilder()
                         .append(tableIndent)
                         .append("%")
-                        .append(Main.SCREEN_WIDTH_IN_CHARS)
+                        .append(ScreenConstants.SCREEN_WIDTH_IN_CHARS)
                         .append("s \n")
                         .toString(),
-                StringUtils.getRepeatedUntil(tableRowSeparator, Main.SCREEN_WIDTH_IN_CHARS + 10)
+                StringUtils.getRepeatedUntil(tableRowSeparator, ScreenConstants.SCREEN_WIDTH_IN_CHARS + 10)
         );
     }
 

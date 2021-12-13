@@ -1,8 +1,8 @@
-package input.read;
+package input.read.demo;
 
 import utils.ClassMethodUtils;
 
-class InputMessageUtils {
+class InputReadDemoMessageUtils {
 
     static void promptForInput() {
         System.out.println("Please enter you your input");

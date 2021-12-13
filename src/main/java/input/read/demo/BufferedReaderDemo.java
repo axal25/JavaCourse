@@ -1,5 +1,6 @@
-package input.read;
+package input.read.demo;
 
+import input.read.common.DecoratorInputStream;
 import utils.StaticUtils;
 
 import java.io.BufferedReader;
@@ -16,17 +17,17 @@ public class BufferedReaderDemo {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new DecoratorInputStream(System.in)));
 
 
-        InputMessageUtils.promptForInput();
-        InputMessageUtils.promptForValue(InputMessageUtils.getClassNullSafe(inputString));
+        InputReadDemoMessageUtils.promptForInput();
+        InputReadDemoMessageUtils.promptForValue(InputReadDemoMessageUtils.getClassNullSafe(inputString));
 
         try {
             inputString = bufferedReader.readLine();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        InputMessageUtils.printInput(inputString, InputMessageUtils.getClassNullSafe(inputString));
+        InputReadDemoMessageUtils.printInput(inputString, InputReadDemoMessageUtils.getClassNullSafe(inputString));
 
-        InputMessageUtils.promptToContinue();
+        InputReadDemoMessageUtils.promptToContinue();
         try {
             inputString = bufferedReader.readLine();
         } catch (IOException e) {

@@ -174,7 +174,7 @@ public class SolidAcronymTheory {
                                     new ArrayList<>(Arrays.asList(
                                             "High-level module must not depend on the low-level module.",
                                             "Modules should depend on abstractions.",
-                                            "Decoupling - ???"
+                                            "Decoupling - requiring parent class so there is ability to switch concrete implementations easily"
 
                                     ))
                             )

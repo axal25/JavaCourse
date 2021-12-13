@@ -1,4 +1,4 @@
-package input.read;
+package input.read.demo;
 
 import utils.StaticUtils;
 import utils.StringUtils;
@@ -15,13 +15,13 @@ public class ConsoleDemo {
         Console console = System.console();
 
         if (console != null) {
-            InputMessageUtils.promptForInput();
-            InputMessageUtils.promptForValue(InputMessageUtils.getClassNullSafe(input));
+            InputReadDemoMessageUtils.promptForInput();
+            InputReadDemoMessageUtils.promptForValue(InputReadDemoMessageUtils.getClassNullSafe(input));
 
             input = console.readLine();
-            InputMessageUtils.printInput(input, InputMessageUtils.getClassNullSafe(input));
+            InputReadDemoMessageUtils.printInput(input, InputReadDemoMessageUtils.getClassNullSafe(input));
 
-            InputMessageUtils.promptToContinue();
+            InputReadDemoMessageUtils.promptToContinue();
             System.console().readLine();
         } else {
             try {

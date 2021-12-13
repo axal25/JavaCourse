@@ -1,10 +1,10 @@
 package main;
 
 import fibonacci.Fibonacci;
-import input.read.InputRead;
+import input.read.demo.InputReadDemo;
+import input.read.menu.Menu;
+import input.read.menu.Option;
 import interview.Interview;
-import menu.Menu;
-import menu.Option;
 import other.Syntax;
 import stream.Streams;
 import threads.Threads;
@@ -16,7 +16,7 @@ import visitor.main.VisitorMain;
 import java.lang.invoke.MethodHandles;
 
 public class Main {
-    public static final int SCREEN_WIDTH_IN_CHARS = 200;
+
     private static final StaticUtils staticUtils = new StaticUtils(MethodHandles.lookup().lookupClass());
 
     public static void main(String[] args) {
@@ -30,7 +30,7 @@ public class Main {
                 new Option("Program arguments", () -> ArgUtils.printArgs(args)),
                 new Option("Environment variables", EnvUtils::printEnvVars),
                 new Option("Other demonstration", Syntax::main),
-                new Option("Input read", InputRead::main),
+                new Option("Input read", InputReadDemo::main),
                 new Option("Interview questions", () -> Interview.enterMenu(args)),
                 new Option("Visitor demonstration", VisitorMain::main),
                 new Option("Multi-threading demonstration", () -> Threads.main(args)),

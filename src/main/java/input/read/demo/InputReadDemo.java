@@ -1,10 +1,10 @@
-package input.read;
+package input.read.demo;
 
 import utils.StaticUtils;
 
 import java.lang.invoke.MethodHandles;
 
-public class InputRead {
+public class InputReadDemo {
     private static final StaticUtils staticUtils = new StaticUtils(MethodHandles.lookup().lookupClass());
 
     public static void main() {

@@ -2,6 +2,7 @@ package collections;
 
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 class Queues {
@@ -10,10 +11,15 @@ class Queues {
         // Queue interface
 
         // FIFO vs. Priority Queue
+        Queue<?> queue;
 
-        Queue<?> queueLinkedBlockingQueue = new LinkedBlockingQueue<>();
-        Queue<?> queuePriorityQueue = new PriorityQueue<>();
+        queue = blockingQueueInterface();
+        queue = new PriorityQueue<>();
 
-        return queueLinkedBlockingQueue;
+        return queue;
+    }
+
+    private static BlockingQueue<?> blockingQueueInterface() {
+        return new LinkedBlockingQueue<>();
     }
 }

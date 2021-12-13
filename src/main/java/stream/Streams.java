@@ -1,7 +1,7 @@
 package stream;
 
-import menu.Menu;
-import menu.Option;
+import input.read.menu.Menu;
+import input.read.menu.Option;
 import utils.StaticUtils;
 
 import java.lang.invoke.MethodHandles;

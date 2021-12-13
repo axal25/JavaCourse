@@ -1,7 +1,7 @@
 package utils;
 
-import main.Main;
 import org.junit.jupiter.api.*;
+import screen.constants.ScreenConstants;
 
 import java.util.stream.IntStream;
 
@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @DisplayName("StringUtils")
 public class StringUtilsTest {
-    private TestUtils testUtils = new TestUtils(new TestColumnStringUtils(Main.SCREEN_WIDTH_IN_CHARS - 50, 0.2, 0.8));
+    private TestUtils testUtils = new TestUtils(new TestColumnStringUtils(ScreenConstants.SCREEN_WIDTH_IN_CHARS - 50, 0.2, 0.8));
 
     @Nested
     @DisplayName("getRepeatedUntil(String toBeRepeated, int maxLength)")
@@ -42,7 +42,7 @@ public class StringUtilsTest {
     public class GetCenteredStringS1 {
 
         private final String expectedInput = "inputString";
-        private final int expectedCircumfixLength = (Main.SCREEN_WIDTH_IN_CHARS - expectedInput.length()) / 2;
+        private final int expectedCircumfixLength = (ScreenConstants.SCREEN_WIDTH_IN_CHARS - expectedInput.length()) / 2;
         private final String expectedCircumfix =
                 StringUtils.getRepeatedUntil(StringUtils.DEFAULT_WHITE_SPACE, expectedCircumfixLength);
         private final String expectedWhole = new StringBuilder()

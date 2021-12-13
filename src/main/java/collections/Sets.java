@@ -8,11 +8,13 @@ public class Sets {
     public static Set<?> setInterface() {
         // Set interface
 
-        Set<?> setHashSet = hashSet();
-        Set<?> setTreeSet = treeSet();
-        Set<?> setLinkedHashSet = linkedHashSet();
+        Set<?> set;
+        set = hashSet();
+        set = sortedSetInterface();
+        set = treeSet();
+        set = linkedHashSet();
 
-        return setHashSet;
+        return set;
     }
 
     private static HashSet<?> hashSet() {
@@ -28,6 +30,10 @@ public class Sets {
         // Synchronized using wrapper
         Set<?> synchronizedHashSet = Collections.synchronizedSet(hashSet);
         return hashSet;
+    }
+
+    private static SortedSet<?> sortedSetInterface() {
+        return new TreeSet<>();
     }
 
     private static TreeSet<?> treeSet() {

@@ -1,4 +1,4 @@
-package menu;
+package input.read.menu;
 
 public class Option {
     private final String name;
