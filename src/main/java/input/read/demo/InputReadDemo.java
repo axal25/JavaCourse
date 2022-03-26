@@ -1,14 +1,14 @@
 package input.read.demo;
 
-import utils.StaticUtils;
+import utils.StaticOrMainMethodUtils;
 
 import java.lang.invoke.MethodHandles;
 
 public class InputReadDemo {
-    private static final StaticUtils staticUtils = new StaticUtils(MethodHandles.lookup().lookupClass());
+    private static final StaticOrMainMethodUtils staticOrMainMethodUtils = new StaticOrMainMethodUtils(MethodHandles.lookup().lookupClass());
 
     public static void main() {
-        staticUtils.printMainSignature();
+        staticOrMainMethodUtils.printMainSignature();
         BufferedReaderDemo.main();
         ScannerDemo.main();
         ConsoleDemo.main();

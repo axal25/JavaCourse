@@ -1,4 +1,4 @@
-package collections;
+package collections.theory;
 
 import java.util.Collections;
 import java.util.*;

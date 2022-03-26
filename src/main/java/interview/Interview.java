@@ -1,16 +1,17 @@
 package interview;
 
-import collections.CollectionFramework;
+import collections.theory.CollectionFramework;
 import input.read.menu.Menu;
 import input.read.menu.Option;
+import reverse.polish.notation.ReversePolishNotationAkaPostfixNotationDemo;
 import solid.SolidAcronym;
 import utils.CollectionUtils;
-import utils.StaticUtils;
+import utils.StaticOrMainMethodUtils;
 
 import java.lang.invoke.MethodHandles;
 
 public class Interview {
-    private static final StaticUtils staticUtils = new StaticUtils(MethodHandles.lookup().lookupClass());
+    private static final StaticOrMainMethodUtils staticOrMainMethodUtils = new StaticOrMainMethodUtils(MethodHandles.lookup().lookupClass());
 
     public static void main(String[] args) {
         // TODO: Delete
@@ -19,10 +20,11 @@ public class Interview {
     }
 
     public static void enterMenu(String[] args) {
-        staticUtils.printMethodSignature("enterMenu", args.getClass());
+        staticOrMainMethodUtils.printMethodSignature("enterMenu", args.getClass());
         Menu.open(new Option[]{
                 new Option("SOLID Acronym", SolidAcronym::main),
                 new Option("Collection framework", CollectionFramework::main),
+                new Option("Reverse Polish / PostFix Notation", ReversePolishNotationAkaPostfixNotationDemo::main),
                 new Option("printInterviewQuestions1", Interview::printInterviewQuestions1),
                 new Option("printInterviewQuestions2", Interview::printInterviewQuestions2),
         });

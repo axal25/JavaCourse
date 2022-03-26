@@ -1,6 +1,6 @@
 package stream;
 
-import utils.StaticUtils;
+import utils.StaticOrMainMethodUtils;
 
 import java.lang.invoke.MethodHandles;
 import java.util.Arrays;
@@ -15,10 +15,10 @@ import static stream.StreamExamplesData.NAMES;
  */
 public class StreamExamples {
 
-    private static final StaticUtils staticUtils = new StaticUtils(MethodHandles.lookup().lookupClass());
+    private static final StaticOrMainMethodUtils staticOrMainMethodUtils = new StaticOrMainMethodUtils(MethodHandles.lookup().lookupClass());
 
     public static void main() {
-        staticUtils.printMethodSignature("main");
+        staticOrMainMethodUtils.printMethodSignature("main");
         print0To10();
         print0To10SkipFirst5();
         printSum0To10();
@@ -29,24 +29,24 @@ public class StreamExamples {
     }
 
     private static void print0To10() {
-        staticUtils.printMethodSignature("print0To10");
+        staticOrMainMethodUtils.printMethodSignature("print0To10");
         Arrays.stream(INTS).forEach(System.out::print);
         System.out.println();
     }
 
     private static void print0To10SkipFirst5() {
-        staticUtils.printMethodSignature("print0To10SkipFirst5");
+        staticOrMainMethodUtils.printMethodSignature("print0To10SkipFirst5");
         Arrays.stream(INTS).skip(5).forEach(System.out::print);
         System.out.println();
     }
 
     private static void printSum0To10() {
-        staticUtils.printMethodSignature("printSum0To10");
+        staticOrMainMethodUtils.printMethodSignature("printSum0To10");
         System.out.println(Arrays.stream(INTS).sum());
     }
 
     private static void printFirstIfFoundOutOfSortedStringsCBA() {
-        staticUtils.printMethodSignature("printFirstIfFoundOutOfSortedStringsCBA");
+        staticOrMainMethodUtils.printMethodSignature("printFirstIfFoundOutOfSortedStringsCBA");
 
         String[] strings = new String[]{"C", "B", "A"};
 
@@ -59,7 +59,7 @@ public class StreamExamples {
     }
 
     private static void printNamesStartingWithG() {
-        staticUtils.printMethodSignature("printNamesStartingWithG");
+        staticOrMainMethodUtils.printMethodSignature("printNamesStartingWithG");
 
         System.out.print("Concatenated names: ");
         Arrays.stream(NAMES).forEach(System.out::print);
@@ -98,7 +98,7 @@ public class StreamExamples {
     }
 
     private static void print0to10SquaredAverage() {
-        staticUtils.printMethodSignature("print0to10SquaredAverage");
+        staticOrMainMethodUtils.printMethodSignature("print0to10SquaredAverage");
 
         System.out.print("0 to 10 int array (concatenated): ");
         Arrays.stream(INTS).forEach(System.out::print);
@@ -112,7 +112,7 @@ public class StreamExamples {
     }
 
     private static void printNamesLowercaseStartingWithG() {
-        staticUtils.printMethodSignature("printNamesLowercaseStartingWithG");
+        staticOrMainMethodUtils.printMethodSignature("printNamesLowercaseStartingWithG");
 
         System.out.print("Names stating with G lowercase [first filter by starts with G, then map to lowercase] (concatenated): ");
         Arrays.asList(NAMES)

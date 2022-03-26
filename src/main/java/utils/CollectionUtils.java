@@ -1,9 +1,20 @@
 package utils;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class CollectionUtils {
+
+    public static <T extends Object> List<T> toList(T[] array) {
+        return Arrays.stream(array).collect(Collectors.toList());
+    }
+
+    public static List<Integer> toList(int[] array) {
+        return Arrays.stream(array).boxed().collect(Collectors.toList());
+    }
 
     public static void printAsSemiJson(Object[] table, String tableName) {
         System.out.println(tableName + ": [");

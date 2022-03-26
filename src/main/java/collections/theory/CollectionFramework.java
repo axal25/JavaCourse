@@ -1,6 +1,6 @@
-package collections;
+package collections.theory;
 
-import utils.StaticUtils;
+import utils.StaticOrMainMethodUtils;
 
 import java.lang.invoke.MethodHandles;
 import java.util.ArrayList;
@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 public class CollectionFramework {
 
-    private static final StaticUtils staticUtils = new StaticUtils(MethodHandles.lookup().lookupClass());
+    private static final StaticOrMainMethodUtils staticOrMainMethodUtils = new StaticOrMainMethodUtils(MethodHandles.lookup().lookupClass());
 
     public static void main(String[] args) {
         // TODO: Remove
@@ -17,7 +17,7 @@ public class CollectionFramework {
     }
 
     public static void main() {
-        staticUtils.printMethodSignature("main");
+        staticOrMainMethodUtils.printMethodSignature("main");
         collectionFramework().print();
     }
 

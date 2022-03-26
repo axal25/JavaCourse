@@ -3,7 +3,7 @@ package input.read.menu;
 import input.read.common.DecoratorInputStream;
 import input.read.common.InputCommons;
 import utils.ClassMethodUtils;
-import utils.StaticUtils;
+import utils.StaticOrMainMethodUtils;
 
 import java.lang.invoke.MethodHandles;
 import java.util.Arrays;
@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 
 public class Menu {
 
-    private static final StaticUtils staticUtils = new StaticUtils(MethodHandles.lookup().lookupClass());
+    private static final StaticOrMainMethodUtils staticOrMainMethodUtils = new StaticOrMainMethodUtils(MethodHandles.lookup().lookupClass());
 
     private Option[] options;
 
@@ -23,7 +23,7 @@ public class Menu {
     }
 
     private Integer getOptionFromInputLoop() {
-        staticUtils.printMethodSignature("getOptionFromInputLoop");
+        staticOrMainMethodUtils.printMethodSignature("getOptionFromInputLoop");
         Integer inputInteger = null;
         boolean executeLoop = true;
 

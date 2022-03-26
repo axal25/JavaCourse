@@ -1,16 +1,16 @@
 package visitor.main;
 
-import utils.StaticUtils;
+import utils.StaticOrMainMethodUtils;
 import visitor.printer.VisitorPrinter;
 
 import java.lang.invoke.MethodHandles;
 
 public class VisitorMain {
 
-    private static final StaticUtils staticUtils = new StaticUtils(MethodHandles.lookup().lookupClass());
-    
+    private static final StaticOrMainMethodUtils staticOrMainMethodUtils = new StaticOrMainMethodUtils(MethodHandles.lookup().lookupClass());
+
     public static void main() {
-        staticUtils.printMethodSignature("main");
+        staticOrMainMethodUtils.printMethodSignature("main");
 
         VisitorPrinter.test();
     }

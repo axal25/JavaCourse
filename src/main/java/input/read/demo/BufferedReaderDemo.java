@@ -1,7 +1,7 @@
 package input.read.demo;
 
 import input.read.common.DecoratorInputStream;
-import utils.StaticUtils;
+import utils.StaticOrMainMethodUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,10 +9,10 @@ import java.io.InputStreamReader;
 import java.lang.invoke.MethodHandles;
 
 public class BufferedReaderDemo {
-    private static final StaticUtils staticUtils = new StaticUtils(MethodHandles.lookup().lookupClass());
+    private static final StaticOrMainMethodUtils staticOrMainMethodUtils = new StaticOrMainMethodUtils(MethodHandles.lookup().lookupClass());
 
     public static void main() {
-        staticUtils.printMainSignature();
+        staticOrMainMethodUtils.printMainSignature();
         String inputString = null;
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new DecoratorInputStream(System.in)));
 

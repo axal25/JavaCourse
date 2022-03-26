@@ -1,4 +1,4 @@
-package collections;
+package collections.theory;
 
 import input.read.formatter.PrintFormatter;
 import utils.ClassMethodUtils;

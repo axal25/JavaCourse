@@ -6,26 +6,27 @@ import input.read.menu.Menu;
 import input.read.menu.Option;
 import interview.Interview;
 import other.Syntax;
+import regex.pattern.scanner.RegexPatternScannerDemo;
 import stream.Streams;
 import threads.Threads;
 import utils.ArgUtils;
 import utils.EnvUtils;
-import utils.StaticUtils;
+import utils.StaticOrMainMethodUtils;
 import visitor.main.VisitorMain;
 
 import java.lang.invoke.MethodHandles;
 
 public class Main {
 
-    private static final StaticUtils staticUtils = new StaticUtils(MethodHandles.lookup().lookupClass());
+    private static final StaticOrMainMethodUtils staticOrMainMethodUtils = new StaticOrMainMethodUtils(MethodHandles.lookup().lookupClass());
 
     public static void main(String[] args) {
-        staticUtils.printMainSignature(args.getClass());
+        staticOrMainMethodUtils.printMainSignature(args.getClass());
         enterMenu(args);
     }
 
     private static void enterMenu(String[] args) {
-        staticUtils.printMethodSignature("enterMenu", args.getClass());
+        staticOrMainMethodUtils.printMethodSignature("enterMenu", args.getClass());
         Menu.open(new Option[]{
                 new Option("Program arguments", () -> ArgUtils.printArgs(args)),
                 new Option("Environment variables", EnvUtils::printEnvVars),
@@ -40,7 +41,8 @@ public class Main {
                     Fibonacci.Test.testIsMemberUntil(40);
                 }),
                 new Option("Solution demonstration", () -> other.Solution.main(args)),
-                new Option("Streams", Streams::main)
+                new Option("Streams", Streams::main),
+                new Option("Regex Pattern Scanner", RegexPatternScannerDemo::main),
         });
     }
 }

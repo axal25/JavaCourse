@@ -1,6 +1,6 @@
 package stream;
 
-import utils.StaticUtils;
+import utils.StaticOrMainMethodUtils;
 import utils.exceptions.UnsupportedCollectorParallelLeftFoldOperation;
 
 import java.lang.invoke.MethodHandles;
@@ -22,10 +22,10 @@ import java.util.stream.Stream;
  */
 public class StreamCollectorSequentialVsParallel {
 
-    private static final StaticUtils staticUtils = new StaticUtils(MethodHandles.lookup().lookupClass());
+    private static final StaticOrMainMethodUtils staticOrMainMethodUtils = new StaticOrMainMethodUtils(MethodHandles.lookup().lookupClass());
 
     public static void main() {
-        staticUtils.printMethodSignature("main");
+        staticOrMainMethodUtils.printMethodSignature("main");
 
         final Collector<Integer, ?, List<Integer>> sequentialCollector = Collector.of(
                 ArrayList::new,

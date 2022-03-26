@@ -2,20 +2,35 @@ package utils;
 
 import screen.constants.ScreenConstants;
 
+import java.util.Map;
+
 public class StringUtils {
-    public static String EMPTY = "";
-    private static String SPACE = " ";
-    private static String NEW_LINE_FEED = "\n";
-    private static String CARRIAGE_RETURN = "\r";
-    private static String NEW_LINE = String.format("%s%s", NEW_LINE_FEED, CARRIAGE_RETURN);
-    private static String HORIZONTAL_TABULATION = "\t";
+    public static final String EMPTY = "";
+    public static final String SPACE = " ";
+    private static final String NEW_LINE_FEED = "\n";
+    private static final String CARRIAGE_RETURN = "\r";
+    private static final String NEW_LINE = String.format("%s%s", NEW_LINE_FEED, CARRIAGE_RETURN);
+    private static final String HORIZONTAL_TABULATION = "\t";
 
-    public static String LF = NEW_LINE_FEED;
-    public static String CR = CARRIAGE_RETURN;
-    public static String NL = NEW_LINE;
-    public static String TAB = HORIZONTAL_TABULATION;
+    public static final String LF = NEW_LINE_FEED;
+    public static final String CR = CARRIAGE_RETURN;
+    public static final String NL = NEW_LINE;
+    public static final String TAB = HORIZONTAL_TABULATION;
 
-    static String DEFAULT_WHITE_SPACE = SPACE;
+    static final String DEFAULT_WHITE_SPACE = SPACE;
+
+    private static final Map<String, String> nlsToPrintable;
+
+    static {
+        nlsToPrintable = Map.of(StringUtils.LF, "LF", StringUtils.CR, "CR", StringUtils.NL, "NL");
+    }
+
+    public static String replaceNLsWithPrintable(String input) {
+        return input
+                .replaceAll(NL, nlsToPrintable.get(NL))
+                .replaceAll(LF, nlsToPrintable.get(LF))
+                .replaceAll(CR, nlsToPrintable.get(CR));
+    }
 
     private static boolean isEmpty(String input) {
         return input == null || input.isEmpty();

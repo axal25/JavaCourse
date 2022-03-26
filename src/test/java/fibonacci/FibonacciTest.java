@@ -21,55 +21,14 @@ public class FibonacciTest {
 
     private static final int fibMemNumMax = 40;
 
-    @BeforeAll
-    public void beforeAll() {
-        System.out.println(getClass().getSimpleName() + " - beforeAll");
-    }
-
-    @AfterAll
-    public void afterAll() {
-        System.out.println(getClass().getSimpleName() + " - afterAll");
-    }
-
-    @BeforeEach
-    void beforeEach() {
-        System.out.println(getClass().getSimpleName() + " - beforeEach");
-    }
-
-    @AfterEach
-    void afterEach() {
-        System.out.println(getClass().getSimpleName() + " - afterEach");
-    }
-
     @Nested
     @TestInstance(TestInstance.Lifecycle.PER_CLASS)
     @DisplayName("Tests for V1")
     public class V1Test {
 
-        @BeforeAll
-        public void beforeAll() {
-            System.out.println(getClass().getSimpleName() + " - beforeAll");
-        }
-
-        @AfterAll
-        public void afterAll() {
-            System.out.println(getClass().getSimpleName() + " - afterAll");
-        }
-
-        @BeforeEach
-        void beforeEach() {
-            System.out.println(getClass().getSimpleName() + " - beforeEach");
-        }
-
-        @AfterEach
-        void afterEach() {
-            System.out.println(getClass().getSimpleName() + " - afterEach");
-        }
-
         @Test
         @Order(1)
         public void getMember() {
-            System.out.println(getClass().getSimpleName() + " - getMember - 1");
             for (int i = 0; i < expFibSeq.length; i++) {
                 assertEquals(
                         expFibSeq[i],
@@ -82,7 +41,6 @@ public class FibonacciTest {
         @Test
         @Order(2)
         public void getMemberGreaterOrEqualTo() {
-            System.out.println(getClass().getSimpleName() + " - getMemberGreaterOrEqualTo - 2");
             for (int i = 0; i < expFibSeqMax; i++) {
                 final int finalI = i;
                 assertTrue(
@@ -98,7 +56,6 @@ public class FibonacciTest {
         @Test
         @Order(3)
         public void isMember() {
-            System.out.println(getClass().getSimpleName() + " - isMember - 3");
             for (int i = 0; i < expFibSeqMax; i++) {
                 final int finalI = i;
                 assertEquals(
@@ -113,21 +70,18 @@ public class FibonacciTest {
         @Test
         @Order(4)
         public void getMember_throwsExceptions() {
-            System.out.println(getClass().getSimpleName() + " - getMember_throwsExceptions - 4");
             assertThrows(Exception.class, () -> Fibonacci.V1.getMember(-1));
         }
 
         @Test
         @Order(5)
         public void getMemberGreaterOrEqualTo_throwsExceptions() {
-            System.out.println(getClass().getSimpleName() + " - getMemberGreaterOrEqualTo_throwsExceptions - 5");
             assertThrows(Exception.class, () -> Fibonacci.V1.getMemberGreaterOrEqualTo(-1));
         }
 
         @Test
         @Order(6)
         public void isMember_throwsExceptions() {
-            System.out.println(getClass().getSimpleName() + " - isMember_throwsExceptions - 6");
             assertThrows(Exception.class, () -> Fibonacci.V1.isMember(-1));
         }
     }
@@ -137,30 +91,9 @@ public class FibonacciTest {
     @DisplayName("Tests for V2")
     public class V2Test {
 
-        @BeforeAll
-        public void beforeAll() {
-            System.out.println(getClass().getSimpleName() + " - beforeAll");
-        }
-
-        @AfterAll
-        public void afterAll() {
-            System.out.println(getClass().getSimpleName() + " - afterAll");
-        }
-
-        @BeforeEach
-        void beforeEach() {
-            System.out.println(getClass().getSimpleName() + " - beforeEach");
-        }
-
-        @AfterEach
-        void afterEach() {
-            System.out.println(getClass().getSimpleName() + " - afterEach");
-        }
-
         @Test
         @Order(1)
         public void getMember() {
-            System.out.println(getClass().getSimpleName() + " - getMember - 1");
             for (int i = 0; i < expFibSeq.length; i++) {
                 assertEquals(
                         expFibSeq[i],
@@ -173,7 +106,6 @@ public class FibonacciTest {
         @Test
         @Order(2)
         public void getMemberGreaterOrEqualTo() {
-            System.out.println(getClass().getSimpleName() + " - getMemberGreaterOrEqualTo - 2");
             for (int i = 0; i < expFibSeqMax; i++) {
                 final int finalI = i;
                 assertTrue(
@@ -189,7 +121,6 @@ public class FibonacciTest {
         @Test
         @Order(3)
         public void isMember() {
-            System.out.println(getClass().getSimpleName() + " - isMember - 3");
             for (int i = 0; i < expFibSeqMax; i++) {
                 final int finalI = i;
                 assertEquals(
@@ -204,21 +135,18 @@ public class FibonacciTest {
         @Test
         @Order(4)
         public void getMember_throwsExceptions() {
-            System.out.println(getClass().getSimpleName() + " - getMember_throwsExceptions - 4");
             assertThrows(Exception.class, () -> Fibonacci.V2.getMember(-1));
         }
 
         @Test
         @Order(5)
         public void getMemberGreaterOrEqualTo_throwsExceptions() {
-            System.out.println(getClass().getSimpleName() + " - getMemberGreaterOrEqualTo_throwsExceptions - 5");
             assertThrows(Exception.class, () -> Fibonacci.V2.getMemberGreaterOrEqualTo(-1));
         }
 
         @Test
         @Order(6)
         public void isMember_throwsExceptions() {
-            System.out.println(getClass().getSimpleName() + " - isMember_throwsExceptions - 6");
             assertThrows(Exception.class, () -> Fibonacci.V2.isMember(-1));
         }
     }
@@ -228,30 +156,9 @@ public class FibonacciTest {
     @DisplayName("Tests for V3")
     public class V3 {
 
-        @BeforeAll
-        public void beforeAll() {
-            System.out.println(getClass().getSimpleName() + " - beforeAll");
-        }
-
-        @AfterAll
-        public void afterAll() {
-            System.out.println(getClass().getSimpleName() + " - afterAll");
-        }
-
-        @BeforeEach
-        void beforeEach() {
-            System.out.println(getClass().getSimpleName() + " - beforeEach");
-        }
-
-        @AfterEach
-        void afterEach() {
-            System.out.println(getClass().getSimpleName() + " - afterEach");
-        }
-
         @Test
         @Order(3)
         public void isMember() {
-            System.out.println(getClass().getSimpleName() + " - isMember - 3");
             for (int candidate = 0; candidate < expFibSeqMax; candidate++) {
                 final int finalCandidate = candidate;
                 assertEquals(
@@ -266,7 +173,6 @@ public class FibonacciTest {
         @Test
         @Order(6)
         public void isMember_throwsExceptions() {
-            System.out.println(getClass().getSimpleName() + " - isMember_throwsExceptions - 6");
             assertThrows(Exception.class, () -> Fibonacci.V1.isMember(-1));
         }
     }
@@ -276,30 +182,9 @@ public class FibonacciTest {
     @DisplayName("Tests different versions against each other")
     public class AgainstEachOther {
 
-        @BeforeAll
-        public void beforeAll() {
-            System.out.println(getClass().getSimpleName() + " - beforeAll");
-        }
-
-        @AfterAll
-        public void afterAll() {
-            System.out.println(getClass().getSimpleName() + " - afterAll");
-        }
-
-        @BeforeEach
-        void beforeEach() {
-            System.out.println(getClass().getSimpleName() + " - beforeEach");
-        }
-
-        @AfterEach
-        void afterEach() {
-            System.out.println(getClass().getSimpleName() + " - afterEach");
-        }
-
         @Test
         @Order(1)
         public void getMember() {
-            System.out.println(getClass().getSimpleName() + " - getMember - 1");
             if (Float.MAX_VALUE < Integer.MAX_VALUE) {
                 throw new RuntimeException("Cannot convert every Integer to Float");
             }
@@ -320,7 +205,6 @@ public class FibonacciTest {
         @Test
         @Order(2)
         public void getMemberGreaterOrEqualTo() {
-            System.out.println(getClass().getSimpleName() + " - getMemberGreaterOrEqualTo - 2");
             if (Float.MAX_VALUE < Integer.MAX_VALUE) {
                 throw new RuntimeException("Cannot convert every Integer to Float");
             }
@@ -340,7 +224,6 @@ public class FibonacciTest {
         @Test
         @Order(3)
         public void isMember() {
-            System.out.println(getClass().getSimpleName() + " - isMember - 3");
             int currMember = 0;
             for (int i = 0; (currMember = Fibonacci.V1.getMember(i)) < expFibSeqMax; i++) {
                 String errMsg = new StringBuilder().append("For index: ").append(i).toString();

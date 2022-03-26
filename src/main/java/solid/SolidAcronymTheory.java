@@ -2,7 +2,7 @@ package solid;
 
 import solid.example.*;
 import utils.ClassMethodUtils;
-import utils.StaticUtils;
+import utils.StaticOrMainMethodUtils;
 
 import java.lang.invoke.MethodHandles;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import java.util.LinkedHashMap;
 
 public class SolidAcronymTheory {
 
-    private static final StaticUtils staticUtils = new StaticUtils(MethodHandles.lookup().lookupClass());
+    private static final StaticOrMainMethodUtils staticOrMainMethodUtils = new StaticOrMainMethodUtils(MethodHandles.lookup().lookupClass());
 
     private final Definitions definitions;
 
@@ -25,7 +25,7 @@ public class SolidAcronymTheory {
     }
 
     public static void main() {
-        staticUtils.printMethodSignature("main");
+        staticOrMainMethodUtils.printMethodSignature("main");
         System.out.println(new SolidAcronymTheory().definitions.toPrintableString());
     }
 
@@ -137,7 +137,7 @@ public class SolidAcronymTheory {
                                                     .append("\t")
                                                     .append("The only thing that would be changed is the new implementation of ")
                                                     .append(ClassMethodUtils.getClassSimpleName(AreaFul.class))
-                                                    .append(" interface in form of Triangle class, which would implement .")
+                                                    .append(" interface in form of Triangle class, which would implement ")
                                                     .append(ClassMethodUtils.getClassAndMethodAndArgs(AreaFul.class, "getArea"))
                                                     .append(" method.")
                                                     .toString()

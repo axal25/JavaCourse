@@ -10,11 +10,11 @@ package utils;
  * {@code mainUtils.printMainSignature(Class<?> argClazzes);}
  * More info in ClassMethodUtils#getCurrentClassV7, ClassMethodUtils#getCurrentClassV6
  */
-public final class StaticUtils {
+public final class StaticOrMainMethodUtils {
 
     private final Class<?> mainOwner;
 
-    public StaticUtils(Class<?> mainOwner) {
+    public StaticOrMainMethodUtils(Class<?> mainOwner) {
         this.mainOwner = mainOwner;
     }
 

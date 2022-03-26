@@ -1,7 +1,7 @@
 package input.read.demo;
 
 import input.read.common.DecoratorInputStream;
-import utils.StaticUtils;
+import utils.StaticOrMainMethodUtils;
 import utils.StringUtils;
 
 import java.lang.invoke.MethodHandles;
@@ -9,17 +9,17 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 class ScannerDemo {
-    private static final StaticUtils staticUtils = new StaticUtils(MethodHandles.lookup().lookupClass());
+    private static final StaticOrMainMethodUtils staticOrMainMethodUtils = new StaticOrMainMethodUtils(MethodHandles.lookup().lookupClass());
 
     static void main() {
-        staticUtils.printMainSignature();
+        staticOrMainMethodUtils.printMainSignature();
         getStringInput();
         getDoubleInput();
         getIntegerInputLoop();
     }
 
     private static String getStringInput() {
-        staticUtils.printMethodSignature("promptStringInput");
+        staticOrMainMethodUtils.printMethodSignature("promptStringInput");
         String inputString = null;
         Scanner scanner = new Scanner(new DecoratorInputStream(System.in));
 
@@ -40,7 +40,7 @@ class ScannerDemo {
     }
 
     private static Double getDoubleInput() {
-        staticUtils.printMethodSignature("promptDoubleInputLoop");
+        staticOrMainMethodUtils.printMethodSignature("promptDoubleInputLoop");
         Double inputDouble = null;
         Scanner scanner = new Scanner(new DecoratorInputStream(System.in));
 
@@ -65,7 +65,7 @@ class ScannerDemo {
     }
 
     private static Integer getIntegerInputLoop() {
-        staticUtils.printMethodSignature("promptIntInputLoop");
+        staticOrMainMethodUtils.printMethodSignature("promptIntInputLoop");
         Integer inputInteger = null;
         boolean executeLoop = true;
 

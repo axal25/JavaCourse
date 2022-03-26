@@ -1,6 +1,6 @@
 package equals.and.hashcode.and.comparable;
 
-import utils.StaticUtils;
+import utils.StaticOrMainMethodUtils;
 import utils.StringUtils;
 
 import java.lang.invoke.MethodHandles;
@@ -8,7 +8,7 @@ import java.util.*;
 
 public class EqualsAndHashCodeAndComparable {
 
-    private static final StaticUtils staticUtils = new StaticUtils(MethodHandles.lookup().lookupClass());
+    private static final StaticOrMainMethodUtils staticOrMainMethodUtils = new StaticOrMainMethodUtils(MethodHandles.lookup().lookupClass());
 
     public static void main(String[] args) {
         // TODO: Remove
@@ -16,7 +16,7 @@ public class EqualsAndHashCodeAndComparable {
     }
 
     public static void main() {
-        staticUtils.printMainSignature();
+        staticOrMainMethodUtils.printMainSignature();
 
         DefaultEqualsAndHashAndComparable default1 = new DefaultEqualsAndHashAndComparable(1);
         DefaultEqualsAndHashAndComparable default2 = new DefaultEqualsAndHashAndComparable(1);

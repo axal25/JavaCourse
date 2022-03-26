@@ -4,7 +4,7 @@ import org.junit.jupiter.api.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-@DisplayName("Test for input.read.formatter.InputFormatterTest")
+@DisplayName("Test for InputFormatter")
 public class InputFormatterTest {
 
     @BeforeAll

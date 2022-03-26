@@ -1,4 +1,4 @@
-package collections;
+package collections.theory;
 
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
