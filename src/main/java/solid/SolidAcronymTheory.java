@@ -45,7 +45,7 @@ public class SolidAcronymTheory {
                                             "For example while having:",
                                             new StringBuilder()
                                                     .append("\t\t interface: ")
-                                                    .append(ClassMethodUtils.getClassSimpleName(AreaFul.class))
+                                                    .append(ClassMethodUtils.getClassSimpleName(AreaFulShape.class))
                                                     .append(";")
                                                     .toString(),
                                             new StringBuilder()
@@ -88,23 +88,23 @@ public class SolidAcronymTheory {
                                             new StringBuilder()
                                                     .append("\t")
                                                     .append("Imagine a situation where we would like to expand the amount of ")
-                                                    .append(ClassMethodUtils.getClassSimpleName(AreaFul.class))
+                                                    .append(ClassMethodUtils.getClassSimpleName(AreaFulShape.class))
                                                     .append(" types, by adding Triangle.")
                                                     .toString(),
                                             new StringBuilder()
                                                     .append("\t")
                                                     .append("If the logic calculating the area for given type of ")
-                                                    .append(ClassMethodUtils.getClassSimpleName(AreaFul.class))
+                                                    .append(ClassMethodUtils.getClassSimpleName(AreaFulShape.class))
                                                     .append(" would be connected to class ")
                                                     .append(ClassMethodUtils.getClassSimpleName(ShapeCollectionAreaCalculator.class))
                                                     .append(", adding new type of ")
-                                                    .append(ClassMethodUtils.getClassSimpleName(AreaFul.class))
+                                                    .append(ClassMethodUtils.getClassSimpleName(AreaFulShape.class))
                                                     .append(" would be problematic.")
                                                     .toString(),
                                             new StringBuilder()
                                                     .append("\t")
                                                     .append("Each time we would like to add a new type of ")
-                                                    .append(ClassMethodUtils.getClassSimpleName(AreaFul.class))
+                                                    .append(ClassMethodUtils.getClassSimpleName(AreaFulShape.class))
                                                     .append(" we would have to modify class ")
                                                     .append(ClassMethodUtils.getClassSimpleName(ShapeCollectionAreaCalculator.class))
                                                     .append(", its logic calculating summing up the area.")
@@ -112,11 +112,11 @@ public class SolidAcronymTheory {
                                             new StringBuilder()
                                                     .append("\t")
                                                     .append("The specific implementation of logic behind calculating area for given type of ")
-                                                    .append(ClassMethodUtils.getClassSimpleName(AreaFul.class))
+                                                    .append(ClassMethodUtils.getClassSimpleName(AreaFulShape.class))
                                                     .append(" should not be tied to ")
                                                     .append(ClassMethodUtils.getClassSimpleName(ShapeCollectionAreaCalculator.class))
                                                     .append(" but to each individual implementation of ")
-                                                    .append(ClassMethodUtils.getClassSimpleName(AreaFul.class))
+                                                    .append(ClassMethodUtils.getClassSimpleName(AreaFulShape.class))
                                                     .append(" - like: ")
                                                     .append(ClassMethodUtils.getClassSimpleName(Rectangle.class))
                                                     .append(", ")
@@ -130,15 +130,15 @@ public class SolidAcronymTheory {
                                                     .append("This way ")
                                                     .append(ClassMethodUtils.getClassSimpleName(ShapeCollectionAreaCalculator.class))
                                                     .append(" remains unchanged when we add new type of ")
-                                                    .append(ClassMethodUtils.getClassSimpleName(AreaFul.class))
+                                                    .append(ClassMethodUtils.getClassSimpleName(AreaFulShape.class))
                                                     .append(".")
                                                     .toString(),
                                             new StringBuilder()
                                                     .append("\t")
                                                     .append("The only thing that would be changed is the new implementation of ")
-                                                    .append(ClassMethodUtils.getClassSimpleName(AreaFul.class))
+                                                    .append(ClassMethodUtils.getClassSimpleName(AreaFulShape.class))
                                                     .append(" interface in form of Triangle class, which would implement ")
-                                                    .append(ClassMethodUtils.getClassAndMethodAndArgs(AreaFul.class, "getArea"))
+                                                    .append(ClassMethodUtils.getClassAndMethodAndArgs(AreaFulShape.class, "getArea"))
                                                     .append(" method.")
                                                     .toString()
                                     ))
@@ -151,7 +151,18 @@ public class SolidAcronymTheory {
                                     new ArrayList<>(Arrays.asList(
                                             "Every subclass or derived class should be substitutable for their base or parent class.",
                                             "Methods using base classes should not need to know which kind of implementation it is using, out of all classes deriving from base class.",
-                                            "It should be enough for a method using base class to know that it is using some kind of implementation of base class."
+                                            "It should be enough for a method using base class to know that it is using some kind of implementation of base class.",
+                                            new StringBuilder()
+                                                    .append("\t")
+                                                    .append(ClassMethodUtils.getClassSimpleName(ShapeCollectionAreaCalculator.class))
+                                                    .append(" can use ")
+                                                    .append(ClassMethodUtils.getClassSimpleName(AreaFulShape.class))
+                                                    .append(" implementations to get given ")
+                                                    .append(ClassMethodUtils.getClassSimpleName(Shape.class))
+                                                    .append(" areas without knowing which exact ")
+                                                    .append(ClassMethodUtils.getClassSimpleName(Shape.class))
+                                                    .append(" implementation it is.\n")
+                                                    .toString()
                                     ))
                             )
                     );
@@ -163,7 +174,14 @@ public class SolidAcronymTheory {
                                             "Client should never be forced to implement an interface which would be unused.",
                                             "Client should not be forced to depend on methods that will not be used.",
                                             "Many smaller interfaces is better than one bloated.",
-                                            "If the implementation of interface methods is often forced, they are left unused then interface is bloated."
+                                            "If the implementation of interface methods is often forced, they are left unused then interface is bloated.",
+                                            new StringBuilder()
+                                                    .append("\t")
+                                                    .append(ClassMethodUtils.getClassSimpleName(Line.class))
+                                                    .append(" implementing ")
+                                                    .append(ClassMethodUtils.getClassSimpleName(Shape.class))
+                                                    .append(" does not have area so it can't implement getArea() method and should not implement AreaFulShape.")
+                                                    .toString()
                                     ))
                             )
                     );
@@ -174,8 +192,17 @@ public class SolidAcronymTheory {
                                     new ArrayList<>(Arrays.asList(
                                             "High-level module must not depend on the low-level module.",
                                             "Modules should depend on abstractions.",
-                                            "Decoupling - requiring parent class so there is ability to switch concrete implementations easily"
-
+                                            "Decoupling - requiring parent class so there is ability to easily switch concrete implementations.",
+                                            new StringBuilder()
+                                                    .append("\t")
+                                                    .append("For example ")
+                                                    .append(ClassMethodUtils.getClassSimpleName(Line.class))
+                                                    .append(" implementing ")
+                                                    .append(ClassMethodUtils.getClassSimpleName(Shape.class))
+                                                    .append(" does not ever have an area so it should not implement ")
+                                                    .append(ClassMethodUtils.getClassSimpleName(AreaFulShape.class))
+                                                    .append(".\n")
+                                                    .toString()
                                     ))
                             )
                     );

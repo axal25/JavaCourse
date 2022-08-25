@@ -45,22 +45,23 @@ JavaCourse
 10. Stash current uncommited changes  
     `git stash`
 11. Reverse stashed-in changes (apply changes back in again)
-     1. when there is only 1 stash  
-        `git stash apply`
-     1. when there are more than 1 stash  
-        `git stash apply stash@{<stash_number>}`
+    1. when there is only 1 stash  
+       `git stash apply`
+    1. when there are more than 1 stash  
+       `git stash apply stash@{<stash_number>}`
 12. Remove stash (stashed changes)
-     1. when there is only 1 stash  
-        `git stash drop`
-     1. when there are more than 1 stash  
-        `git stash drop stash@{<stash_number>}`
+    1. when there is only 1 stash  
+       `git stash drop`
+    1. when there are more than 1 stash  
+       `git stash drop stash@{<stash_number>}`
 
 # Troubles
+
 1. Git push not working - ~~master~~ is now **main**
     1. Trouble scenario  
        `$ git push -u origin master`  
        `error: src refspec master does not match any`
-       `error: failed to push some refs to 'https://github.com/axal25/`DockAuto.git'`
+       `error: failed to push some refs to 'https://github.com/axal25/{...}.git'`
     1. Fix
         1. Show references  
            `$ git show-ref`

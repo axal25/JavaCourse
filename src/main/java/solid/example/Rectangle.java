@@ -1,6 +1,6 @@
 package solid.example;
 
-public class Rectangle implements AreaFul {
+public class Rectangle implements AreaFulShape {
     private final double sideA, sideB;
 
     Rectangle(final double sideA, final double sideB) {

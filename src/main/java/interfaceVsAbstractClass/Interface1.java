@@ -3,34 +3,33 @@ package interfaceVsAbstractClass;
 public interface Interface1 {
 
     /*******************************************************/
-    public static final int variable1 = 0;
-    // protected static final int variable2 = 0;
-    // private static final int variable3 = 0;
-    static final int variable4 = 0; // public
-
-    static final int variable5 = 0; // public
-    static int variable6 = 0; // public final
-    int variable7 = 0; // public static final
-
-    /*******************************************************/
-    public void method1();
-
-    void method2(); // public
-    // protected void method3();
-    // private void method4();
+    public static final int public_static_final_int = 0;
+    // protected static final int protected_static_final_int = 0;
+    // private static final int private_static_final_int = 0;
+    static final int static_final_int = 0;
+    static int static_int = 0;
+    final int final_int = 0;
+    int an_int = 0;
 
     /*******************************************************/
-    default public void method5() {
+    public void public_method();
+    // protected void protected_method();
+    // private void private_method();
+
+    void method(); // public
+
+    /*******************************************************/
+    default public void default_public_method() {
     }
 
-    default void method6() { // public
+    default void default_method() { // public
     }
 
     /*******************************************************/
     // default public static void method7() {}
-    public static void method8() {
+    public static void public_static_method() {
     }
 
-    static void method9() { // public
+    static void static_method() { // public
     }
 }

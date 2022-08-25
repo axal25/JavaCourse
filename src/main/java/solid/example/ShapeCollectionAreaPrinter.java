@@ -18,13 +18,13 @@ public class ShapeCollectionAreaPrinter {
     }
 
     private void printIndividualAreas() {
-        final AreaFul[] areaFuls = shapeCollectionAreaCalculator.getShapes();
-        IntStream.range(0, areaFuls.length)
+        final AreaFulShape[] areaFulShapes = shapeCollectionAreaCalculator.getAreaFulShapes();
+        IntStream.range(0, areaFulShapes.length)
                 .forEach(i ->
                         System.out.println(
                                 String.format("%s's area: %f",
-                                        ClassMethodUtils.getClassSimpleName(areaFuls[i].getClass()),
-                                        areaFuls[i].getArea()
+                                        ClassMethodUtils.getClassSimpleName(areaFulShapes[i].getClass()),
+                                        areaFulShapes[i].getArea()
                                 )
                         )
                 );

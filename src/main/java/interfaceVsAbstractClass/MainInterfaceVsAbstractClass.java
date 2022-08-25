@@ -2,35 +2,40 @@ package interfaceVsAbstractClass;
 
 public class MainInterfaceVsAbstractClass {
     // TODO: https://www.geeksforgeeks.org/difference-between-abstract-class-and-interface-in-java/
-    
+
     public static void main(String[] args) {
         Interface1 interface1 = new Interface1() {
             @Override
-            public void method1() {
+            public void public_method() {
 
             }
 
             @Override
-            public void method2() {
+            public void method() {
 
             }
         };
 
         int var;
-        var = Interface1.variable1;
-        var = Interface1.variable4;
-        var = Interface1.variable5;
-        var = Interface1.variable6;
-        var = Interface1.variable7;
-        // Interface1.variable6++; // final
-        // Interface1.variable7++; // static final
+        var = Interface1.public_static_final_int;
+        var = Interface1.static_final_int;
+        var = Interface1.static_int;
+        var = Interface1.final_int;
+        var = Interface1.an_int;
 
+        // Interface1.public_static_final_int++;
+        // Interface1.static_final_int++; // is public by default
+        // Interface1.static_int++; // is public, static by default
+        // Interface1.final_int++; // is public, final by default
+        // Interface1.an_int++; // is public, final, static by default
 
-        interface1.method1();
-        interface1.method2();
-        interface1.method5();
-        interface1.method6();
-        Interface1.method8();
-        Interface1.method9();
+        interface1.public_method();
+        interface1.method();
+
+        interface1.default_public_method();
+        interface1.default_method();
+
+        Interface1.public_static_method();
+        Interface1.static_method();
     }
 }

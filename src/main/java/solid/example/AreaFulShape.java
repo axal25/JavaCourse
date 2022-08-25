@@ -1,6 +1,6 @@
 package solid.example;
 
-public interface AreaFul {
+public interface AreaFulShape extends Shape {
 
     public double getArea();
 }

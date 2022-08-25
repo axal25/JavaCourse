@@ -1,6 +1,6 @@
 package solid.example;
 
-public class Circle implements AreaFul {
+public class Circle implements AreaFulShape {
 
     private final double radius;
 
