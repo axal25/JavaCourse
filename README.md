@@ -20,6 +20,10 @@ JavaCourse
    In future main branch can change from ~~master~~ to **main**  
    `git push -u origin main`
 
+### Pass
+
+1. `pass -c Git/axal25`
+
 #### Other git useful information
 
 1. Remove added to index file  
