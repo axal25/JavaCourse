@@ -7,8 +7,8 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 class Queues {
 
-    static Queue<?> queueInterface() {
-        // Queue interface
+    static Information queueInterface() {
+        Information queueInterfaceInformation = new Information(Queue.class);
 
         // FIFO vs. Priority Queue
         Queue<?> queue;
@@ -16,7 +16,7 @@ class Queues {
         queue = blockingQueueInterface();
         queue = new PriorityQueue<>();
 
-        return queue;
+        return queueInterfaceInformation;
     }
 
     private static BlockingQueue<?> blockingQueueInterface() {

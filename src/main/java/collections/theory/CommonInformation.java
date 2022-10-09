@@ -12,7 +12,7 @@ class CommonInformation {
     );
 
     static final List<String> FAIL_FAST = List.of(
-            "fail-fast iterator - when concurrent operations causes structure modification after iteration creation a ConcurrentModificationException will be thrown. Does not result in non-deterministic behaviour. This trait should not be trusted. It is not guaranteed. Use only to detect bugs."
+            "fail-fast iterator - when concurrent operation cause structure modification after iterator creation a ConcurrentModificationException will be thrown. Does not result in non-deterministic behaviour. This trait should not be trusted. It is not guaranteed. Use only to detect bugs."
     );
 
     static final class Maps {
@@ -54,7 +54,7 @@ class CommonInformation {
             List.of("\t", " synchronized", " = Collections.synchronized", "(", ");")
     );
 
-    public static List<String> getSynchronization(Class<?> interfaze, Class<?> clazz) {
+    static List<String> getSynchronization(Class<?> interfaze, Class<?> clazz) {
         String interfaceSimpleName = ClassMethodUtils.getClassSimpleName(interfaze);
         String classSimpleName = ClassMethodUtils.getClassSimpleName(clazz);
         String classSimpleNameLowerCaseFirstLetter = String.format(

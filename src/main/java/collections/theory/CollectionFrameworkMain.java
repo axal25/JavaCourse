@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
-public class CollectionFramework {
+public class CollectionFrameworkMain {
 
     private static final StaticOrMainMethodUtils staticOrMainMethodUtils = new StaticOrMainMethodUtils(MethodHandles.lookup().lookupClass());
 
@@ -18,20 +18,14 @@ public class CollectionFramework {
 
     public static void main() {
         staticOrMainMethodUtils.printMethodSignature("main");
-        collectionFramework().print();
+        getCollectionFrameworkInformation().print();
     }
 
-    private static Information collectionFramework() {
+    private static Information getCollectionFrameworkInformation() {
         Information collectionFrameworkInformation = new Information("Collections framework");
         collectionFrameworkInformation.appendln("Collection framework consists of 2 interfaces: Collection and Map.");
 
         Collection<?> col;
-
-        collectionFrameworkInformation.appendln("Collection interface is member of Collection framework");
-        collectionFrameworkInformation.addChild(Collections.collectionInterface());
-
-        collectionFrameworkInformation.appendln("Map interface is member of Collection framework");
-        collectionFrameworkInformation.addChild(Maps.mapInterface());
 
         col = (Collection<?>) new ArrayList<>();
         try {
@@ -45,7 +39,12 @@ public class CollectionFramework {
             collectionFrameworkInformation.appendln(e.getMessage());
         }
 
+        collectionFrameworkInformation.appendln("Collection interface is member of Collection framework");
+        collectionFrameworkInformation.addChild(Collections.collectionInterface());
+
+        collectionFrameworkInformation.appendln("Map interface is member of Collection framework");
+        collectionFrameworkInformation.addChild(Maps.mapInterface());
+
         return collectionFrameworkInformation;
     }
-
 }

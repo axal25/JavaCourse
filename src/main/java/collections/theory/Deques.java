@@ -8,8 +8,8 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 class Deques {
 
-    static Deque<?> dequeInterface() {
-        // Deque interface
+    static Information dequeInterface() {
+        Information dequeInterfaceInformation = new Information(Deque.class);
 
         // Deque is double-ended-queue
         // Deque implements Queue (FIFO) and Stack (FILO)
@@ -20,7 +20,7 @@ class Deques {
         deque = new LinkedList<>();
         deque = new LinkedBlockingDeque<>();
 
-        return deque;
+        return dequeInterfaceInformation;
     }
 
     private static BlockingDeque<?> blockingDequeInterface() {

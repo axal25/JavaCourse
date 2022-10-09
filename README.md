@@ -47,7 +47,7 @@ JavaCourse
 9. List stashes  
    `git stash list`
 10. Stash current uncommited changes  
-    `git stash`
+    `git stash -m 'message'`
 11. Reverse stashed-in changes (apply changes back in again)
     1. when there is only 1 stash  
        `git stash apply`
@@ -58,6 +58,21 @@ JavaCourse
        `git stash drop`
     1. when there are more than 1 stash  
        `git stash drop stash@{<stash_number>}`
+13. Branching
+    1. list all branches  
+       `git branch -a`
+    1. switch to different branch  
+       `git switch <branch_name>`
+    1. creates a branch off of current branch we are on  
+       `git branch <branch_name>`
+    1. creates a branch off of branch with name <branch_name_source>
+       `git branch <branch_name_target> <branch_name_source>`
+    1. show log  
+       `git log --oneline --graph`
+       ```text
+       * <commit_nb> (HEAD -> master, origin/master, origin/HEAD, <branch_name_target>) <commit_msg>
+       ...
+       ```
 
 # Troubles
 

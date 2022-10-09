@@ -5,7 +5,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Lists {
 
-    public static Information listInterface() {
+    static Information listInterface() {
         Information listInterfaceInformation = new Information(List.class);
 
         listInterfaceInformation.appendln("Ordered collection");
@@ -14,24 +14,22 @@ public class Lists {
         List<?> list;
 
         listInterfaceInformation.appendln("ArrayList class implements List interface");
-        listInterfaceInformation.addChild(arrayList());
         list = new ArrayList<>();
-
-        listInterfaceInformation.appendln("LinkedList class implements List interface");
-        listInterfaceInformation.addChild(linkedList());
-        list = new LinkedList<>();
+        listInterfaceInformation.addChild(arrayList());
 
         listInterfaceInformation.appendln("CopyOnWriteArrayList class implements List interface");
-        listInterfaceInformation.addChild(copyOnWriteArrayList());
         list = new CopyOnWriteArrayList<>();
+        listInterfaceInformation.addChild(copyOnWriteArrayList());
+
+        listInterfaceInformation.appendln("LinkedList class implements List interface");
+        list = new LinkedList<>();
+        listInterfaceInformation.addChild(linkedList());
 
         listInterfaceInformation.appendln("Vector class implements List interface");
-        listInterfaceInformation.addChild(vector());
         list = new Vector<>();
-
         listInterfaceInformation.appendln("Stack class implements List interface");
-        // listInterfaceInformation.addChild(stack()); // Already added under vector
         list = new Stack<>();
+        listInterfaceInformation.addChild(vector());
 
         return listInterfaceInformation;
     }
@@ -65,6 +63,19 @@ public class Lists {
         return arrayListInformation;
     }
 
+    private static Information copyOnWriteArrayList() {
+        Information copyOnWriteArrayListInformation = new Information(CopyOnWriteArrayList.class);
+
+        copyOnWriteArrayListInformation.appendln("ArrayList + thread-safe (no interference or ConcurrentModificationException without synchro)");
+        copyOnWriteArrayListInformation.appendln("creates snapshot copy of source array");
+        copyOnWriteArrayListInformation.appendln("iterator will not reflect mutative operations, array never changes during iterator's lifetime");
+        copyOnWriteArrayListInformation.appendln("mutative operations are not supported on iterators themselves - will throw UnsupportedOperationException");
+
+        CopyOnWriteArrayList<?> copyOnWriteArrayList = new CopyOnWriteArrayList<>();
+
+        return copyOnWriteArrayListInformation;
+    }
+
     private static Information linkedList() {
         Information linkedListInformation = new Information(LinkedList.class);
 
@@ -88,19 +99,6 @@ public class Lists {
         List<?> synchronizedLinkedList = java.util.Collections.synchronizedList(linkedList);
 
         return linkedListInformation;
-    }
-
-    private static Information copyOnWriteArrayList() {
-        Information copyOnWriteArrayListInformation = new Information(CopyOnWriteArrayList.class);
-
-        copyOnWriteArrayListInformation.appendln("ArrayList + thread-safe (no interference or ConcurrentModificationException without synchro)");
-        copyOnWriteArrayListInformation.appendln("creates snapshot copy of source array");
-        copyOnWriteArrayListInformation.appendln("iterator will not reflect mutative operations, array never changes during iterator's lifetime");
-        copyOnWriteArrayListInformation.appendln("mutative operations are not supported on iterators themselves - will throw UnsupportedOperationException");
-
-        CopyOnWriteArrayList<?> copyOnWriteArrayList = new CopyOnWriteArrayList<>();
-
-        return copyOnWriteArrayListInformation;
     }
 
     private static Information vector() {
@@ -131,7 +129,7 @@ public class Lists {
         Stack<?> stack = new Stack<>();
 
         stackInformation.appendln("Stack extends Vector class");
-        Vector<?> vector = stack;
+        Vector<?> vector = new Stack<>();
 
         stackInformation.appendln("Deque (ArrayDequeue) should be used in preference to Stack. Deque and Stack have no close class hierarchy relation (other than Collection, AbstractCollection).");
 

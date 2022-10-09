@@ -3,6 +3,7 @@ package collections.theory;
 import input.read.formatter.PrintFormatter;
 import utils.ClassMethodUtils;
 import utils.StringUtils;
+import utils.VisibleForTesting;
 import utils.exceptions.UnsupportedCollectorParallelLeftFoldOperation;
 
 import java.util.LinkedList;
@@ -11,20 +12,20 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class Information {
-    private String className;
-    private StringBuilder contents;
-    private List<Information> children;
+    private final String className;
+    private final StringBuilder contents;
+    private final List<Information> children;
 
     Information(String className) {
         this.className = className;
-        this.contents = new StringBuilder();
-        this.children = new LinkedList<>();
+        contents = new StringBuilder();
+        children = new LinkedList<>();
     }
 
-    Information(Class clazz) {
-        this.className = ClassMethodUtils.getClassSimpleName(clazz);
-        this.contents = new StringBuilder();
-        this.children = new LinkedList<>();
+    Information(Class<?> clazz) {
+        className = ClassMethodUtils.getClassSimpleName(clazz);
+        contents = new StringBuilder();
+        children = new LinkedList<>();
     }
 
     Information appendln(List<String> toBeAddeds) {
@@ -41,7 +42,7 @@ public class Information {
         return this;
     }
 
-    public Information addChild(Information child) {
+    Information addChild(Information child) {
         children.add(child);
         return this;
     }
@@ -50,7 +51,9 @@ public class Information {
         PrintFormatter.print(getPrintString());
     }
 
-    private String getPrintString() {
+
+    @VisibleForTesting
+    String getPrintString() {
         return children.stream().map(child -> String.format("%s%s%s", StringUtils.NL, StringUtils.NL, child.getPrintString())).collect(
                 Collectors.collectingAndThen(
                         Collector.of(
@@ -75,7 +78,8 @@ public class Information {
         );
     }
 
-    private String getStructure(String indent) {
+    @VisibleForTesting
+    String getStructure(String indent) {
         String nextIndent = String.format("%s%s", indent, StringUtils.TAB);
         return children.stream().map(child -> child.getStructure(nextIndent))
                 .collect(
@@ -89,5 +93,20 @@ public class Information {
                                 childrenStructure -> String.format("%s%s%s%s", indent, className, StringUtils.NL, childrenStructure)
                         )
                 );
+    }
+
+    @VisibleForTesting
+    String getClassName() {
+        return className;
+    }
+
+    @VisibleForTesting
+    StringBuilder getContents() {
+        return contents;
+    }
+
+    @VisibleForTesting
+    List<Information> getChildren() {
+        return children;
     }
 }

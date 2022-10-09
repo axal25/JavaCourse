@@ -1,8 +1,6 @@
 package collections.theory;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 public class Collections {
 
@@ -12,7 +10,9 @@ public class Collections {
         Collection<?> collection;
 
         collectionInterfaceInformation.appendln("Set interface is extending Collection interface");
-        collection = Sets.setInterface();
+        Set<?> set = new HashSet<>();
+        collection = set;
+        collectionInterfaceInformation.addChild(Sets.setInterface());
 
         collectionInterfaceInformation.appendln("List interface is extending Collection interface");
         List<?> list = new ArrayList<>();
@@ -20,12 +20,15 @@ public class Collections {
         collectionInterfaceInformation.addChild(Lists.listInterface());
 
         collectionInterfaceInformation.appendln("Queue interface is extending Collection interface");
-        collection = Queues.queueInterface();
+        Queue<?> queue = new PriorityQueue<>();
+        collection = queue;
+        collectionInterfaceInformation.addChild(Queues.queueInterface());
 
         collectionInterfaceInformation.appendln("Deque interface is extending Collection interface");
-        collection = Deques.dequeInterface();
+        Deque<?> deque = new ArrayDeque<>();
+        collection = deque;
+        collectionInterfaceInformation.addChild(Deques.dequeInterface());
 
         return collectionInterfaceInformation;
     }
-
 }
