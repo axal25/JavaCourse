@@ -2,11 +2,9 @@ package utils;
 
 import screen.constants.ScreenConstants;
 
-import java.util.Map;
-
 public class StringUtils {
     public static final String EMPTY = "";
-    public static final String SPACE = " ";
+    private static final String SPACE = " ";
     private static final String NEW_LINE_FEED = "\n";
     private static final String CARRIAGE_RETURN = "\r";
     private static final String NEW_LINE = String.format("%s%s", NEW_LINE_FEED, CARRIAGE_RETURN);
@@ -19,17 +17,8 @@ public class StringUtils {
 
     static final String DEFAULT_WHITE_SPACE = SPACE;
 
-    private static final Map<String, String> nlsToPrintable;
-
-    static {
-        nlsToPrintable = Map.of(StringUtils.LF, "LF", StringUtils.CR, "CR", StringUtils.NL, "NL");
-    }
-
-    public static String replaceNLsWithPrintable(String input) {
-        return input
-                .replaceAll(NL, nlsToPrintable.get(NL))
-                .replaceAll(LF, nlsToPrintable.get(LF))
-                .replaceAll(CR, nlsToPrintable.get(CR));
+    public static <T> String toStringNullSafe(T object) {
+        return object == null ? null : object.toString();
     }
 
     private static boolean isEmpty(String input) {

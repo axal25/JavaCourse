@@ -8,11 +8,13 @@ class Maps {
         Information mapInterfaceInformation = new Information(Map.class);
 
         Map<?, ?> map;
+        NavigableMap<?, ?> navigableMap;
+        SortedMap<?, ?> sortedMap = new TreeMap<>();
+        AbstractMap<?, ?> abstractMap;
+        Dictionary<?, ?> dictionary;
 
         mapInterfaceInformation.appendln("SortedMap interface extends Map interface");
         mapInterfaceInformation.addChild(sortedMapInterface());
-        SortedMap<?, ?> sortedMap = new TreeMap<>();
-        map = sortedMap;
 
         mapInterfaceInformation.appendln("Hashtable class implements Map interface");
         mapInterfaceInformation.addChild(hashtable());
@@ -22,13 +24,13 @@ class Maps {
         mapInterfaceInformation.addChild(hashMap());
         map = new HashMap<>();
 
+        mapInterfaceInformation.appendln("LinkedHashMap class implements Map interface");
+        // mapInterfaceInformation.addChild(linkedHashMap()); // Already added under hashMap
+        map = new LinkedHashMap<>();
+
         mapInterfaceInformation.appendln("TreeMap class implements Map interface");
         // mapInterfaceInformation.addChild(treeMap()); // Already added under sortedMapInterface
         map = new TreeMap<>();
-
-        mapInterfaceInformation.appendln("LinkedHashMap class implements Map interface");
-        mapInterfaceInformation.addChild(linkedHashMap());
-        map = new LinkedHashMap<>();
 
         return mapInterfaceInformation;
     }
@@ -36,35 +38,31 @@ class Maps {
     private static Information sortedMapInterface() {
         Information sortedMapInformation = new Information(SortedMap.class);
 
-        sortedMapInformation.appendln("SortedMap interface extends Map interface");
+        sortedMapInformation.appendln(String.format(
+                "%s interface extends %s interface", SortedMap.class.getSimpleName(), Map.class.getSimpleName()));
 
-        try {
-            // will throw ClassCastException
-            SortedMap<?, ?> sortedMapIsNotHashMap = (SortedMap<?, ?>) new HashMap<>();
-            // will not be thrown
-            throw new RuntimeException("Hashmap IMPLEMENTS SortedMap?!");
-        } catch (ClassCastException e) {
-            sortedMapInformation.appendln("Hashmap class does NOT implement SortedMap interface");
-        } catch (RuntimeException e) {
-            sortedMapInformation.appendln(e.getMessage());
-        }
+        sortedMapInformation.appendln(String.format(
+                "%s class implements %s interface", TreeMap.class.getSimpleName(), SortedMap.class.getSimpleName()));
+        SortedMap<?, ?> sortedMap = new TreeMap<>();
 
-        sortedMapInformation.appendln("TreeMap class implements SortedMap interface");
-        SortedMap<?, ?> sortedMapTreeMap = new TreeMap<>();
-        sortedMapInformation.addChild(treeMap());
-
-        try {
-            // will throw ClassCastException
-            SortedMap<?, ?> sortedMapIsNotLinkedHashMap = (SortedMap<?, ?>) new LinkedHashMap<>();
-            // will not be thrown
-            throw new RuntimeException("LinkedHashMap IMPLEMENTS SortedMap?!");
-        } catch (ClassCastException e) {
-            sortedMapInformation.appendln("LinkedHashMap class does NOT implement SortedMap interface");
-        } catch (RuntimeException e) {
-            sortedMapInformation.appendln(e.getMessage());
-        }
+        sortedMapInformation.addChild(navigableMapInterface());
 
         return sortedMapInformation;
+    }
+
+    private static Information navigableMapInterface() {
+        Information navigableMapInformation = new Information(NavigableMap.class);
+
+        navigableMapInformation.appendln(String.format(
+                "%s interface extends %s interface", NavigableMap.class.getSimpleName(), SortedMap.class.getSimpleName()));
+
+        navigableMapInformation.appendln(String.format(
+                "%s class implements %s interface", TreeMap.class.getSimpleName(), NavigableMap.class.getSimpleName()));
+
+        NavigableMap<?, ?> navigableMap = new TreeMap<>();
+        navigableMapInformation.addChild(treeMap());
+
+        return navigableMapInformation;
     }
 
     private static Information treeMap() {
@@ -88,9 +86,10 @@ class Maps {
         treeMapInformation.appendln(CommonInformation.Maps.STRUCTURE_MODIFICATION);
 
         TreeMap<?, ?> treeMap = new TreeMap<>();
+        treeMap.firstEntry();
 
         treeMapInformation.appendln(CommonInformation.getSynchronization(SortedMap.class, TreeMap.class));
-        SortedMap<?, ?> synchronizedTreeMap = java.util.Collections.synchronizedSortedMap(treeMap);
+        NavigableMap<?, ?> synchronizedTreeMap = java.util.Collections.synchronizedNavigableMap(treeMap);
 
         return treeMapInformation;
     }
@@ -144,6 +143,8 @@ class Maps {
 
         hashMapInformation.appendln("LinkedHashMap class extends HashMap class");
         hashMap = new LinkedHashMap<>();
+
+        hashMapInformation.addChild(linkedHashMap());
 
         return hashMapInformation;
     }

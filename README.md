@@ -73,6 +73,8 @@ JavaCourse
        * <commit_nb> (HEAD -> master, origin/master, origin/HEAD, <branch_name_target>) <commit_msg>
        ...
        ```
+    1. push new branch to remote repository (when new branch does not exist on remote rep)  
+       `git push -u origin <branch_name_target>:<branch_name_target_remote_non_existing>`
 
 # Troubles
 

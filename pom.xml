@@ -9,6 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <name>Java course</name>
     <description>Collection of Java topics</description>
+    <url>https://github.com/axal25/JavaCourse</url>
 
     <properties>
         <java.version>11</java.version>
@@ -87,7 +88,7 @@
                             <descriptorRefs>
                                 <descriptorRef>jar-with-dependencies</descriptorRef>
                             </descriptorRefs>
-                            <finalName>JavaCourse_complete_standalone</finalName>
+                            <finalName>${project.name}_complete_standalone</finalName>
                             <appendAssemblyId>false</appendAssemblyId>
                         </configuration>
                     </execution>

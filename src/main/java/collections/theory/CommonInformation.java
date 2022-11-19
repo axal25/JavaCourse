@@ -8,11 +8,11 @@ import java.util.Locale;
 class CommonInformation {
 
     static final List<String> UNSYNCHRONIZED = List.of(
-            "Unsynchronized - need to be synchronized for concurrent operations."
+            "Unsynchronized - needs to be synchronized for concurrent operations."
     );
 
     static final List<String> FAIL_FAST = List.of(
-            "fail-fast iterator - when concurrent operation cause structure modification after iterator creation a ConcurrentModificationException will be thrown. Does not result in non-deterministic behaviour. This trait should not be trusted. It is not guaranteed. Use only to detect bugs."
+            "fail-fast iterator - when concurrent operation causes structure modification after iterator creation a ConcurrentModificationException will be thrown. Does not result in non-deterministic behaviour. This trait should not be trusted. It is not guaranteed. Use only to detect bugs."
     );
 
     static final class Maps {
