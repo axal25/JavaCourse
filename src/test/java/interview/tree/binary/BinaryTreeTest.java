@@ -12,6 +12,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 @DisplayName("Test for BinaryTree")
 public class BinaryTreeTest {
 
+    private static final String BINARY_TREE = BinaryTree.class.getSimpleName();
+    private static final String BINARY_TREE_NODE = BinaryTreeNode.class.getSimpleName();
+
     @Test
     @Order(1)
     public void constructor_Equals_allArgsNull() {
@@ -31,8 +34,8 @@ public class BinaryTreeTest {
     @Test
     @Order(3)
     public void constructorToString_1Leaf() {
-        String expectedToString = "BinaryTree{" + StringUtils.NL +
-                "root=BinaryTreeBranch{" + StringUtils.NL +
+        String expectedToString = BINARY_TREE + "{" + StringUtils.NL +
+                StringUtils.TAB + "root=" + BINARY_TREE_NODE + "{" + StringUtils.NL +
                 StringUtils.TAB + StringUtils.TAB + "value=1" + StringUtils.NL +
                 StringUtils.TAB + StringUtils.TAB + "left=null" + StringUtils.NL +
                 StringUtils.TAB + StringUtils.TAB + "right=null" + StringUtils.NL +
@@ -46,11 +49,19 @@ public class BinaryTreeTest {
     @Test
     @Order(4)
     public void constructorToString_1Root2Leafs() {
-        String expectedToString = "BinaryTree{" + StringUtils.NL +
-                "root=BinaryTreeBranch{" + StringUtils.NL +
+        String expectedToString = BINARY_TREE + "{" + StringUtils.NL +
+                StringUtils.TAB + "root=" + BINARY_TREE_NODE + "{" + StringUtils.NL +
                 StringUtils.TAB + StringUtils.TAB + "value=1" + StringUtils.NL +
-                StringUtils.TAB + StringUtils.TAB + "left=null" + StringUtils.NL +
-                StringUtils.TAB + StringUtils.TAB + "right=null" + StringUtils.NL +
+                StringUtils.TAB + StringUtils.TAB + "left=" + BINARY_TREE_NODE + "{" + StringUtils.NL +
+                StringUtils.TAB + StringUtils.TAB + StringUtils.TAB + "value=2" + StringUtils.NL +
+                StringUtils.TAB + StringUtils.TAB + StringUtils.TAB + "left=null" + StringUtils.NL +
+                StringUtils.TAB + StringUtils.TAB + StringUtils.TAB + "right=null" + StringUtils.NL +
+                StringUtils.TAB + StringUtils.TAB + "}" + StringUtils.NL +
+                StringUtils.TAB + StringUtils.TAB + "right=" + BINARY_TREE_NODE + "{" + StringUtils.NL +
+                StringUtils.TAB + StringUtils.TAB + StringUtils.TAB + "value=3" + StringUtils.NL +
+                StringUtils.TAB + StringUtils.TAB + StringUtils.TAB + "left=null" + StringUtils.NL +
+                StringUtils.TAB + StringUtils.TAB + StringUtils.TAB + "right=null" + StringUtils.NL +
+                StringUtils.TAB + StringUtils.TAB + "}" + StringUtils.NL +
                 StringUtils.TAB + "}" + StringUtils.NL +
                 "}";
         BinaryTree<Integer> binaryTree = new BinaryTree<>(

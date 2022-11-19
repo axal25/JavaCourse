@@ -22,6 +22,7 @@ public class BinaryTree<T> {
                 .append(ClassMethodUtils.getClassSimpleName(getClass()))
                 .append("{")
                 .append(StringUtils.NL)
+                .append(StringUtils.TAB)
                 .append("root=")
                 .append(BinaryTreeNode.toStringNullSafe(root, 1))
                 .append(StringUtils.NL)

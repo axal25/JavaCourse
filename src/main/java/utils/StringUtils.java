@@ -7,7 +7,7 @@ public class StringUtils {
     private static final String SPACE = " ";
     private static final String NEW_LINE_FEED = "\n";
     private static final String CARRIAGE_RETURN = "\r";
-    private static final String NEW_LINE = String.format("%s%s", NEW_LINE_FEED, CARRIAGE_RETURN);
+    private static final String NEW_LINE = String.format("%s%s", CARRIAGE_RETURN, NEW_LINE_FEED);
     private static final String HORIZONTAL_TABULATION = "\t";
 
     public static final String LF = NEW_LINE_FEED;
