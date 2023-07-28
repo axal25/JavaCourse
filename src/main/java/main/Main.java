@@ -12,7 +12,7 @@ import threads.Threads;
 import utils.ArgUtils;
 import utils.EnvUtils;
 import utils.StaticOrMainMethodUtils;
-import visitor.main.VisitorMain;
+import pattern.visitor.old.main.VisitorMain;
 
 import java.lang.invoke.MethodHandles;
 
