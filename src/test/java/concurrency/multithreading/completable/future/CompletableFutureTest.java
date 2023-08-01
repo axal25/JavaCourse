@@ -1,5 +1,7 @@
 package concurrency.multithreading.completable.future;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -8,6 +10,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -597,7 +600,6 @@ public class CompletableFutureTest {
                 "complete: " + inputOutput,
                 "thenApplyAsync #2: " + inputOutput + " 2nd"));
     }
-
 
     @Test
     void async_vs_nonAsyncMethods() {
@@ -1394,6 +1396,238 @@ public class CompletableFutureTest {
         }
         assertDoesNotThrow(() -> assertThat(cfCompleted.get()).isEqualTo("before_timeout"));
         assertDoesNotThrow(() -> assertThat(cfCompletedOnTimeout.get()).isEqualTo("before_timeout"));
+    }
+
+    @Test
+    void completeExceptionally() {
+        CompletableFuture<String> cf = new CompletableFuture<>();
+        Throwable stubThrowable = new Throwable();
+        cf.completeExceptionally(stubThrowable);
+
+        ExecutionException cfTimeoutGetException = assertThrows(ExecutionException.class, () -> cf.get());
+        assertThat(cfTimeoutGetException).hasCauseThat().isEqualTo(stubThrowable);
+
+        CompletableFuture<String> cfTimeoutHandle = cf.handleAsync((string, throwable) -> {
+            assertThat(string).isNull();
+            assertThat(throwable).isEqualTo(stubThrowable);
+            return throwable.toString();
+        });
+        assertDoesNotThrow(() -> assertThat(cfTimeoutHandle.get()).isEqualTo(stubThrowable.toString()));
+    }
+
+    @Test
+    void orTimeout_delayerExecutor_handleThrowableIsTimeoutException() {
+        Thread waitThread = new Thread(() -> {
+            Thread privWaitThread = Thread.currentThread();
+            synchronized (privWaitThread) {
+                try {
+                    privWaitThread.wait();
+                } catch (InterruptedException e) {
+                    privWaitThread.interrupt();
+                    throw new RuntimeException(e);
+                }
+            }
+        }, "waitThread");
+        waitThread.start();
+        CompletableFuture<String> cfLengthyOrTimeout = new CompletableFuture<String>()
+                .completeAsync(() -> {
+                    try {
+                        waitThread.join();
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                        throw new RuntimeException(e);
+                    }
+                    return "not reachable";
+                })
+                .orTimeout(100, MILLISECONDS);
+        TimeoutException getWithTimeoutException1 = assertThrows(TimeoutException.class, () -> cfLengthyOrTimeout.get(1, TimeUnit.NANOSECONDS));
+        assertThat(getWithTimeoutException1).hasCauseThat().isNull();
+        assertThat(getWithTimeoutException1).hasMessageThat().isNull();
+
+        ExecutionException getWithTimeoutException2 = assertThrows(ExecutionException.class, () -> cfLengthyOrTimeout.get(100, MILLISECONDS));
+        assertThat(getWithTimeoutException2).hasCauseThat().isInstanceOf(TimeoutException.class);
+        assertThat(getWithTimeoutException2).hasCauseThat().hasMessageThat().isNull();
+        assertThat(getWithTimeoutException2).hasMessageThat().isEqualTo(new TimeoutException().toString());
+
+        ExecutionException getException = assertThrows(ExecutionException.class, cfLengthyOrTimeout::get);
+        assertThat(getException).hasCauseThat().isInstanceOf(TimeoutException.class);
+        assertThat(getException).hasCauseThat().hasMessageThat().isNull();
+        assertThat(getException).hasMessageThat().isEqualTo(new TimeoutException().toString());
+
+        CompletionException joinException = assertThrows(CompletionException.class, cfLengthyOrTimeout::join);
+        assertThat(joinException).hasCauseThat().isInstanceOf(TimeoutException.class);
+        assertThat(joinException).hasCauseThat().hasMessageThat().isNull();
+        assertThat(joinException).hasMessageThat().isEqualTo(new TimeoutException().toString());
+
+        CompletableFuture<String> cfHandle = cfLengthyOrTimeout.handleAsync((string, throwable) -> {
+            assertThat(string).isNull();
+            assertThat(throwable).isInstanceOf(TimeoutException.class);
+            assertThat(throwable).hasCauseThat().isNull();
+            assertThat(throwable).hasMessageThat().isNull();
+            return throwable.toString();
+        });
+        assertThat(cfHandle.join()).isEqualTo(new TimeoutException().toString());
+
+        waitThread.interrupt();
+    }
+
+    @Test
+    void orTimeout_myImplementation_chosenExecutor_handleThrowableIsCompletionExceptionWrappedAroundTimeoutException() {
+        Thread waitThread = new Thread(() -> {
+            Thread privWaitThread = Thread.currentThread();
+            synchronized (privWaitThread) {
+                try {
+                    privWaitThread.wait();
+                } catch (InterruptedException e) {
+                    privWaitThread.interrupt();
+                    throw new RuntimeException(e);
+                }
+            }
+        }, "waitThread");
+        waitThread.start();
+        CompletableFuture<String> cfLengthy = new CompletableFuture<String>()
+                .completeAsync(() -> {
+                    try {
+                        waitThread.join();
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                        throw new RuntimeException(e);
+                    }
+                    return "not reachable";
+                });
+
+        TimeoutException cfLengthyGetWithTimeoutException = assertThrows(TimeoutException.class, () -> cfLengthy.get(1, TimeUnit.NANOSECONDS));
+        assertThat(cfLengthyGetWithTimeoutException).hasCauseThat().isNull();
+        assertThat(cfLengthyGetWithTimeoutException).hasMessageThat().isNull();
+
+        SingleThreadExecutor singleThreadExecutor = new SingleThreadExecutor();
+        CompletableFuture<String> cfTimeout = new CompletableFuture<>();
+        long timeout = 100;
+        TimeUnit timeUnit = MILLISECONDS;
+        Executor timeoutExecutor = singleThreadExecutor;
+        Executor delayedExecutor = CompletableFuture.delayedExecutor(timeout, timeUnit, timeoutExecutor);
+        delayedExecutor.execute(() -> cfTimeout.completeExceptionally(new TimeoutException()));
+
+        ExecutionException cfTimeoutGetException = assertThrows(ExecutionException.class, cfTimeout::get);
+        assertThat(cfTimeoutGetException).hasCauseThat().isInstanceOf(TimeoutException.class);
+        assertThat(cfTimeoutGetException).hasCauseThat().hasCauseThat().isNull();
+        assertThat(cfTimeoutGetException).hasCauseThat().hasMessageThat().isNull();
+        assertThat(cfTimeoutGetException).hasMessageThat().isEqualTo(new TimeoutException().toString());
+
+        CompletableFuture<String> cfTimeoutHandle = cfTimeout.handleAsync((string, throwable) -> {
+            assertThat(string).isNull();
+            assertThat(throwable).isInstanceOf(TimeoutException.class);
+            assertThat(throwable).hasCauseThat().isNull();
+            assertThat(throwable).hasMessageThat().isNull();
+            return throwable.toString();
+        });
+        assertThat(cfTimeoutHandle.join()).isEqualTo(new TimeoutException().toString());
+
+        CompletableFuture<String> cfTimeoutApplyHandle = cfTimeout
+                .thenApplyAsync(in -> in)
+                .handle((string, throwable) -> {
+                    assertThat(string).isNull();
+                    assertThat(throwable).isInstanceOf(CompletionException.class);
+                    assertThat(throwable).hasCauseThat().isInstanceOf(TimeoutException.class);
+                    assertThat(throwable).hasCauseThat().hasCauseThat().isNull();
+                    assertThat(throwable).hasCauseThat().hasMessageThat().isNull();
+                    assertThat(throwable).hasMessageThat().isEqualTo(new TimeoutException().toString());
+                    return throwable.toString();
+                });
+        assertThat(cfTimeoutApplyHandle.join()).isEqualTo(new CompletionException(new TimeoutException()).toString());
+
+        CompletableFuture<String> cfLengthyOrTimeout = cfLengthy.applyToEitherAsync(cfTimeout, in -> in);
+
+        ExecutionException cfLengthyOrTimeoutGetException = assertThrows(ExecutionException.class, cfLengthyOrTimeout::get);
+        assertThat(cfLengthyOrTimeoutGetException).hasCauseThat().isInstanceOf(TimeoutException.class);
+        assertThat(cfLengthyOrTimeoutGetException).hasCauseThat().hasCauseThat().isNull();
+        assertThat(cfLengthyOrTimeoutGetException).hasCauseThat().hasMessageThat().isNull();
+        assertThat(cfLengthyOrTimeoutGetException).hasMessageThat().isEqualTo(new TimeoutException().toString());
+
+        CompletableFuture<String> cfHandle = cfLengthyOrTimeout.handle((string, throwable) -> {
+            assertThat(string).isNull();
+            assertThat(throwable).isInstanceOf(CompletionException.class);
+            assertThat(throwable).hasCauseThat().isInstanceOf(TimeoutException.class);
+            assertThat(throwable).hasCauseThat().hasCauseThat().isNull();
+            assertThat(throwable).hasCauseThat().hasMessageThat().isNull();
+            assertThat(throwable).hasMessageThat().isEqualTo(new TimeoutException().toString());
+            return throwable.toString();
+        });
+        assertThat(cfHandle.join()).isEqualTo(new CompletionException(new TimeoutException()).toString());
+
+        waitThread.interrupt();
+    }
+
+
+    @Test
+    void orTimeout_myImplementation_chosenExecutor_handleThrowableIsTimeoutException() {
+        Thread waitThread = new Thread(() -> {
+            Thread privWaitThread = Thread.currentThread();
+            synchronized (privWaitThread) {
+                try {
+                    privWaitThread.wait();
+                } catch (InterruptedException e) {
+                    privWaitThread.interrupt();
+                    throw new RuntimeException(e);
+                }
+            }
+        }, "waitThread");
+        waitThread.start();
+        CompletableFuture<String> cfLengthy = new CompletableFuture<String>()
+                .completeAsync(() -> {
+                    try {
+                        waitThread.join();
+                    } catch (InterruptedException e) {
+                        Thread.currentThread().interrupt();
+                        throw new RuntimeException(e);
+                    }
+                    return "not reachable";
+                });
+
+        long timeout = 100;
+        TimeUnit timeUnit = MILLISECONDS;
+        SingleThreadExecutor timeoutExecutor = new SingleThreadExecutor();
+        Executor delayedExecutor = CompletableFuture.delayedExecutor(timeout, timeUnit, timeoutExecutor);
+        delayedExecutor.execute(() -> cfLengthy.completeExceptionally(new TimeoutException()));
+
+        CompletableFuture<String> cfLengthyHandle = cfLengthy.handleAsync((string, throwable) -> {
+            assertThat(string).isNull();
+            assertThat(throwable).isInstanceOf(TimeoutException.class);
+            assertThat(throwable).hasCauseThat().isNull();
+            assertThat(throwable).hasMessageThat().isNull();
+            return throwable.toString();
+        });
+        assertThat(cfLengthyHandle.join()).isEqualTo(new TimeoutException().toString());
+    }
+
+    private static class SingleThreadExecutor implements Executor {
+        private final SingleThread singleThread = new SingleThread();
+
+        @Override
+        public void execute(Runnable runnable) {
+            singleThread.run(runnable);
+        }
+
+        @Getter
+        private static class SingleThread extends Thread {
+            private static final AtomicInteger instanceCounter = new AtomicInteger(0);
+            @Setter
+            private Runnable runnable;
+
+            public SingleThread() {
+                super(SingleThread.class.getSimpleName() + "-" + instanceCounter.getAndIncrement());
+            }
+
+            @Override
+            public void run() {
+                runnable.run();
+            }
+
+            public void run(Runnable runnable) {
+                setRunnable(runnable);
+                run();
+            }
+        }
     }
 
     private static class WaitThread extends Thread {
