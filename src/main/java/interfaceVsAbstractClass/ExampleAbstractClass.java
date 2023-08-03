@@ -1,4 +1,4 @@
-// @formatter:off
+// Editor > Code Style > Do not format: src/main/java/interfaceVsAbstractClass/*.java
 package interfaceVsAbstractClass;
 
 import static interfaceVsAbstractClass.MainInterfaceVsAbstractClass.FORMAT_MSG_OBLIGATORY_METHOD;
