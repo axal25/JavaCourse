@@ -1,9 +1,9 @@
+// @formatter:off
 package interfaceVsAbstractClass;
 
 import static interfaceVsAbstractClass.MainInterfaceVsAbstractClass.FORMAT_MSG_OBLIGATORY_METHOD;
 
 public abstract class ExampleAbstractClass {
-    // @formatter:off
 
     /*******************************************************/
     private static final int PUBLIC_STATIC_FINAL_INT = 0;
@@ -136,6 +136,4 @@ public abstract class ExampleAbstractClass {
         ExampleClassExtendingClass.protected_static_method();
         // ExampleClassExtendingClass.private_static_method();
     }
-
-    // @formatter:on
 }

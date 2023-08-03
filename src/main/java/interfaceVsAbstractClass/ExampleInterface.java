@@ -1,3 +1,4 @@
+// @formatter:off
 package interfaceVsAbstractClass;
 
 import static interfaceVsAbstractClass.MainInterfaceVsAbstractClass.FORMAT_MSG_OBLIGATORY_METHOD;
@@ -12,6 +13,8 @@ public interface ExampleInterface {
     static int STATIC_INT = 0;
     final int FINAL_INT = 0;
     int INT = 0;
+    // private int PRIVATE_INT = 0;
+    // protected int PROTECTED_INT = 0;
 
     /*******************************************************/
 
@@ -83,12 +86,12 @@ public interface ExampleInterface {
         ExampleInterface exampleInterface = new ExampleInterface() {
             @Override
             public void public_method() {
-                System.out.println(String.format(FORMAT_MSG_OBLIGATORY_METHOD, "public_method"));
+                System.out.printf((FORMAT_MSG_OBLIGATORY_METHOD) + "%n", "public_method");
             }
 
             @Override
             public void method() {
-                System.out.println(String.format(FORMAT_MSG_OBLIGATORY_METHOD, "method"));
+                System.out.printf((FORMAT_MSG_OBLIGATORY_METHOD) + "%n", "method");
             }
         };
 
