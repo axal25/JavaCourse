@@ -91,4 +91,11 @@ JavaCourse
            `9cf3829b2d50636c2814b08b57c8c0893bfd3630 refs/remotes/origin/main`
         1. Try pushing local HEAD ref to remote master ref  
            `git push -u origin HEAD:master`
-        1. This will creation a remote branch 'master' and push commit there, pull request, merge request required
+        1. This will creation a remote branch 'master' and push commit there, pull request, merge request required\
+2. Exclude files from being formatted: \
+   `File > Settings > Editor > Code Style > Formatter > Do not format:`
+
+```text
+src/main/java/interfaceVsAbstractClass/*.java
+src/test/java/strings/StringsTest.java
+```
