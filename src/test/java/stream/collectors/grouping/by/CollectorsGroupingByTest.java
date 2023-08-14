@@ -7,8 +7,8 @@ import lombok.Getter;
 import lombok.ToString;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
 import java.util.AbstractMap.SimpleEntry;
+import java.util.*;
 import java.util.Map.Entry;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
@@ -24,40 +24,6 @@ public class CollectorsGroupingByTest {
                     && Objects.equals(a.getMax(), b.getMax())
                     && Objects.equals(a.getSum(), b.getSum())
                     && Objects.equals(a.getAverage(), b.getAverage());
-    @Builder
-    @Getter
-    @EqualsAndHashCode
-    @ToString
-    private static class Person {
-        private final Long id;
-        private final String firstName;
-        private final List<String> names;
-        private final String lastName;
-
-        @Builder
-        @Getter
-        @ToString
-        private static class Record {
-            private final List<Person> persons;
-            private final long count;
-            private final LongSummaryStatistics summaryStatisticsForIds;
-
-            @Override
-            public boolean equals(Object o) {
-                if (this == o) return true;
-                if (!(o instanceof Record)) return false;
-                Record record = (Record) o;
-                return count == record.count
-                        && Objects.equals(persons, record.persons)
-                        && LONG_SUMMARY_STATISTICS_EQUALS.apply(summaryStatisticsForIds, record.summaryStatisticsForIds);
-            }
-
-            @Override
-            public int hashCode() {
-                return Objects.hash(persons, count, summaryStatisticsForIds);
-            }
-        }
-    }
 
     @Test
     void groupingBy1Field_defaultSubCollectionIsList_thereAreRepeatedRecords() {
@@ -158,6 +124,46 @@ public class CollectorsGroupingByTest {
                 person1.getLastName(), Set.of(person1, person2SameLastNameAsPerson1),
                 person3.getLastName(), Set.of(person3),
                 person4.getLastName(), Set.of(person4)));
+    }
+
+    @Test
+    void groupingBy1Field_toList_collectingPersonToString() {
+        Person person1 = Person.builder()
+                .firstName("firstName1")
+                .lastName("lastName1")
+                .build();
+        Person person2SameLastNameAsPerson1 = Person.builder()
+                .firstName("firstName2")
+                .lastName("lastName1")
+                .build();
+        Person person3 = Person.builder()
+                .firstName("firstName3")
+                .lastName("lastName3")
+                .build();
+        Person person4 = Person.builder()
+                .firstName("firstName1")
+                .lastName("lastName4")
+                .build();
+        List<Person> persons = List.of(
+                person1,
+                person2SameLastNameAsPerson1,
+                // repetition
+                person1,
+                person3,
+                person4);
+
+        Map<String, List<String>> lastNameToListOfPersonToStringMap =
+                persons.stream().collect(groupingBy(
+                        Person::getLastName,
+                        Collectors.collectingAndThen(
+                                Collectors.toList(),
+                                personList -> personList.stream().map(Person::toString).collect(toList()))));
+
+        // no repetitions
+        assertThat(lastNameToListOfPersonToStringMap).isEqualTo(Map.of(
+                person1.getLastName(), List.of(person1.toString(), person2SameLastNameAsPerson1.toString(), person1.toString()),
+                person3.getLastName(), List.of(person3.toString()),
+                person4.getLastName(), List.of(person4.toString())));
     }
 
     @Test
@@ -574,5 +580,39 @@ public class CollectorsGroupingByTest {
     @Test
     void todo() {
         // TODO: https://www.baeldung.com/java-groupingby-collector#10-aggregating-multiple-attributes-of-a-grouped-result
+    }
+
+    @Builder
+    @Getter
+    @EqualsAndHashCode
+    @ToString
+    private static class Person {
+        private final Long id;
+        private final String firstName;
+        private final List<String> names;
+        private final String lastName;
+
+        @Builder
+        @Getter
+        @ToString
+        private static class Record {
+            private final List<Person> persons;
+            private final long count;
+            private final LongSummaryStatistics summaryStatisticsForIds;
+
+            @Override
+            public int hashCode() {
+                return Objects.hash(persons, count, summaryStatisticsForIds);
+            }
+
+            @Override
+            public boolean equals(Object o) {
+                if (this == o) return true;
+                if (!(o instanceof Record record)) return false;
+                return count == record.count
+                        && Objects.equals(persons, record.persons)
+                        && LONG_SUMMARY_STATISTICS_EQUALS.apply(summaryStatisticsForIds, record.summaryStatisticsForIds);
+            }
+        }
     }
 }
