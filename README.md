@@ -26,55 +26,68 @@ JavaCourse
 
 #### Other git useful information
 
-1. Remove added to index file  
-   `git rm path/to/file`
-2. Remove file/folder from the cached index if necessary  
-   `git rm --cached rel/file/path`  
-   or for directory (recursively)  
-   `git rm --cached -r rel/dir/path`
-3. Reset git local to previous local commit  
-   `git reset HEAD~`
-4. List branches  
-   `git branch`
-5. Crete new branch  
-   `git checkout -b <branchname>`
-6. Switch to existing branch  
-   `git checkout <branch_name>`
-7. Remove local branch  
-   `git branch -d <branch_name>`
-8. Forcefully remove local branch  
-   `git branch -D <branch_name>`
-9. List stashes  
-   `git stash list`
-10. Stash current uncommited changes  
-    `git stash -m 'message'`
-11. Reverse stashed-in changes (apply changes back in again)
-    1. when there is only 1 stash  
-       `git stash apply`
-    1. when there are more than 1 stash  
-       `git stash apply stash@{<stash_number>}`
-12. Remove stash (stashed changes)
-    1. when there is only 1 stash  
-       `git stash drop`
-    1. when there are more than 1 stash  
-       `git stash drop stash@{<stash_number>}`
-13. Branching
-    1. list all branches  
-       `git branch -a`
-    1. switch to different branch  
-       `git switch <branch_name>`
-    1. creates a branch off of current branch we are on  
-       `git branch <branch_name>`
-    1. creates a branch off of branch with name <branch_name_source>
-       `git branch <branch_name_target> <branch_name_source>`
-    1. show log  
-       `git log --oneline --graph`
-       ```text
-       * <commit_nb> (HEAD -> master, origin/master, origin/HEAD, <branch_name_target>) <commit_msg>
-       ...
-       ```
-    1. push new branch to remote repository (when new branch does not exist on remote rep)  
+1. Tracked files
+    1. Remove added to index file  
+       `git rm path/to/file`
+    2. Remove file/folder from the cached index if necessary  
+       `git rm --cached rel/file/path`  
+       or for directory (recursively)  
+       `git rm --cached -r rel/dir/path`
+    3. Reset git local to previous local commit  
+       `git reset HEAD~`
+2. Branches
+    1. List branches
+        1. `git branch`
+        2. or `git branch -a`
+        3. or `git branch --list`
+        4. or `git branch -l`
+    2. Create new branch
+        1. off of branch we are currently on \
+           `git branch <branch_name>`
+        2. off of branch <branch_name_source> \
+           `git branch <branch_name_new> <branch_name_source`
+    3. Switch to branch
+        1. `git checkout <branch_name>`
+        2. or `git switch <branch_name`
+    4. Create new branch and switch to it
+        1. `git checkout -b <branch_name>`
+        2. `git switch -c <branch_name>`
+        3. or
+            1. `git branch <branch_name>`
+            2. and `git checkout <branch_name>`
+        4. or
+            1. `git branch <branch_name>`
+            2. and `git switch <branch_name>`
+    5. Remove local branch  
+       `git branch -d <branch_name>`
+    6. Forcefully remove local branch  
+       `git branch -D <branch_name>`
+    7. push new branch to remote repository (when new branch does not exist on remote rep)  
        `git push -u origin <branch_name_target>:<branch_name_target_remote_non_existing>`
+3. Stashing
+    1. List stashes  
+       `git stash list`
+    2. Stash current uncommited changes  
+       `git stash -m 'message'`
+    3. Reverse stashed-in changes (apply changes back in again)
+        1. when there is only 1 stash  
+           `git stash apply`
+        2. when there are more than 1 stash
+            1. `git stash apply stash@{<stash_number>}`
+            2. or `git stash apply <stash_number>`
+    4. Remove stash (stashed changes)
+        1. when there is only 1 stash  
+           `git stash drop`
+        2. when there are more than 1 stash
+            1. `git stash drop stash@{<stash_number>}`
+            2. or `git stash drop <stash_number>`
+4. Show commit history  
+   `git log --oneline --graph`
+
+```text
+* <commit_nb> (HEAD -> master, origin/master, origin/HEAD, <branch_name_target>) <commit_msg>
+...
+```
 
 # Troubles
 
