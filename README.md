@@ -45,7 +45,7 @@ JavaCourse
         1. off of branch we are currently on \
            `git branch <branch_name>`
         2. off of branch <branch_name_source> \
-           `git branch <branch_name_new> <branch_name_source`
+           `git branch <branch_name_new> <branch_name_source>`
     3. Switch to branch
         1. `git checkout <branch_name>`
         2. or `git switch <branch_name`
@@ -62,9 +62,13 @@ JavaCourse
        `git branch -d <branch_name>`
     6. Forcefully remove local branch  
        `git branch -D <branch_name>`
-    7. push new branch to remote repository (when new branch does not exist on remote rep)  
-       `git push -u origin <branch_name_target>:<branch_name_target_remote_non_existing>`
-3. Stashing
+    7. Push new branch to remote repository (when new branch does not exist on remote rep)
+        1. `git push -u origin <branch_name_new_local>:<branch_name_new_remote>`
+        2. or `git push -u origin <branch_name_new_local_and_remote>`
+3. Restore/check-out file to some version \
+    1. `git checkout -- </path/to/file>`
+    2. or `git restore <path/to/file>`
+4. Stashing
     1. List stashes  
        `git stash list`
     2. Stash current uncommited changes  
@@ -81,7 +85,7 @@ JavaCourse
         2. when there are more than 1 stash
             1. `git stash drop stash@{<stash_number>}`
             2. or `git stash drop <stash_number>`
-4. Show commit history  
+5. Show commit history  
    `git log --oneline --graph`
 
 ```text
