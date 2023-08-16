@@ -48,7 +48,7 @@ JavaCourse
            `git branch <branch_name_new> <branch_name_source>`
     3. Switch to branch
         1. `git checkout <branch_name>`
-        2. or `git switch <branch_name`
+        2. or `git switch <branch_name>`
     4. Create new branch and switch to it
         1. `git checkout -b <branch_name>`
         2. `git switch -c <branch_name>`
