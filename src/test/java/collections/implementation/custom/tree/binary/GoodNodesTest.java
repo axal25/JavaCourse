@@ -15,7 +15,7 @@ public class GoodNodesTest {
      * A node X in the Tree is named 'Good' if in the path from Root to X there are no nodes with a value greater than X.
      * Return the number of 'Good' nodes in the Binary Tree.
      * ------
-     * Maximum Value Node on the Branch (since Root), so far found - count.
+     * Good Node - Maximum Value Node on the Branch found so far (from Root to current Node) - count.
      * ------
      * 3
      * /   \
