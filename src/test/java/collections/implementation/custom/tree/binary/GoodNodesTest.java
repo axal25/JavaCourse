@@ -44,11 +44,12 @@ public class GoodNodesTest {
     @Test
     void getGoodNodes() {
         assertThat(goodBinaryTree).isNotNull();
-        assertThat(goodBinaryTree.getGoodNodes()).containsExactly(
-                goodBinaryTree.getRoot(),
-                goodBinaryTree.getRoot().getLeft().getLeft(),
-                goodBinaryTree.getRoot().getRight(),
-                goodBinaryTree.getRoot().getRight().getRight());
+        Set<Node<Integer>> expecteds = new LinkedHashSet<>();
+        expecteds.add(goodBinaryTree.getRoot());
+        expecteds.add(goodBinaryTree.getRoot().getLeft().getLeft());
+        expecteds.add(goodBinaryTree.getRoot().getRight());
+        expecteds.add(goodBinaryTree.getRoot().getRight().getRight());
+        assertThat(goodBinaryTree.getGoodNodes()).isEqualTo(expecteds);
     }
 
     private static final class GoodBinaryTree extends BinaryTree<Integer> {
